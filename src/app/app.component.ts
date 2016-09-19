@@ -1,5 +1,6 @@
-import { Component, Inject } from '@angular/core';
-import { ItemActions} from './state/item-actions'
+import { Component} from '@angular/core';
+import { Store} from '@ngrx/Store';
+
 
 @Component({
   selector: 'app-root',
@@ -8,16 +9,13 @@ import { ItemActions} from './state/item-actions'
 })
 export class AppComponent {
   title = 'app works!';
-  appStore = null;
+  constructor(private _store : Store<any>){
+    _store.subscribe((state)=>{
+      console.log(state);
+    })
+  }
 
-  constructor(
-    @Inject('AppStore') a, 
-   private itemActions: ItemActions){
-     this.itemActions = itemActions;
-     this.appStore = a;
-   }
-
-   getState(){
-     console.log(this.appStore.getState());
-   }
+  getState(){
+    console.log(this._store);
+  }
 }

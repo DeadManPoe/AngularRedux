@@ -2,12 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import {createStore} from 'redux';
-import {rootReducer} from './state/rootReducer'
-import {ItemActions} from './state/item-actions'
 import { AppComponent } from './app.component';
+import {StoreModule, Store} from '@ngrx/store';
+import {initialState} from './state/state';
+import {filtersReducer} from './state/filters-reducer';
+import {booksReducer} from './state/books-reducer';
 
-const appStore = createStore(rootReducer);
+
 
 @NgModule({
   declarations: [
@@ -16,12 +17,13 @@ const appStore = createStore(rootReducer);
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    StoreModule.provideStore({
+    books : booksReducer,
+    filter : filtersReducer
+  }, initialState)
   ],
-  providers: [
-    { provide: 'AppStore', useValue: appStore },
-    ItemActions 
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

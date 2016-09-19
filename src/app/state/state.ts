@@ -1,12 +1,17 @@
-import {TextItem, ImgItem} from '../item';
-import {FilterType} from './filter-type';
 import {List} from 'immutable';
 
 export interface State {
-    loadedItems : List<ImgItem | TextItem>,
-    filter : FilterType
+    books : List<any>,
+    filter : string
+
 }
 export const initialState : State = {
-    loadedItems : List([]),
-    filter : FilterType.LAST_ADDED
+    books : List([]),
+    filter : 'NONE'
+}
+export const StateStructurer = (booksReducer : Function, filtersReducer : Function )=>{
+        return {
+            books : booksReducer,
+            filters : filtersReducer
+        }
 }
