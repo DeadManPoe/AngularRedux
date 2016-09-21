@@ -7,12 +7,14 @@ import {StoreModule, Store} from '@ngrx/store';
 import {initialState} from './state/state';
 import {filtersReducer} from './state/filters-reducer';
 import {booksReducer} from './state/books-reducer';
+import { BookListComponent } from './book-list/book-list.component';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BookListComponent
   ],
   imports: [
     BrowserModule,

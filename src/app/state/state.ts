@@ -1,7 +1,8 @@
 import {List} from 'immutable';
+import {Book} from '../book'
 
 export interface State {
-    books : List<any>,
+    books : List<Book>,
     filter : string
 
 }
