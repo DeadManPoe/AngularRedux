@@ -1,9 +1,10 @@
-<p>
-  book-list works!
-</p>
-<ul>
-  <li *ngFor="let book of books">
-    <h3>{{book.title}}</h3>
-    <h3>{{book.author}}</h3>
-  </li>
+<ul style="list-style: none;">
+    <li *ngFor="let book of books" style="border: 1px solid red; padding: 5px;">
+        <label for="input-book-title">Title</label>
+        <input type="text" id="input-book-title" [value]="book.title" readonly><br>
+        <label for="input-book-author">Author</label>
+        <input type="text" id="input-book-author" [value]="book.author" readonly><br>
+        <input type="checkbox" [checked]="book.read" (change)="toggleReadBook(book.id)"><br>
+        <button (click)="removeBook(book.id)">Remove book</button>
+    </li>
 </ul>

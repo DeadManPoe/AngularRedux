@@ -9,10 +9,4 @@ export interface State {
 export const initialState : State = {
     books : List([]),
     filter : 'NONE'
-}
-export const StateStructurer = (booksReducer : Function, filtersReducer : Function )=>{
-        return {
-            books : booksReducer,
-            filters : filtersReducer
-        }
-}
+};

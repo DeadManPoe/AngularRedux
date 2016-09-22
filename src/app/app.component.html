@@ -1,18 +1,8 @@
-<h2>Add book</h2>
-<form action="">
-  <label for="input-book-title"></label>
-  <input id="input-book-title" [(ngModel)]="title" type="text" name="a">
-  <label for="input-book-author"></label>
-  <input type="text" id="input-book-author" [(ngModel)]="name" name="b">
-  <button type="button" (click)="addBook()">Add</button>
-</form>
+<app-book-form></app-book-form>
 <p>
-  book-list works!
+    book-list works!
 </p>
-<ul>
-  <li *ngFor="let book of books | async">
-    <h3>{{book.title}}</h3>
-    <h3>{{book.author}}</h3>
-  </li>
-</ul>
+<h3>current filter: {{filter | async}}</h3>
+<button (click)="toggleReadFilter()">toggle_completed</button>
+<app-book-list [books]="books | async"></app-book-list>
 

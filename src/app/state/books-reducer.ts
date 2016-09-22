@@ -1,44 +1,43 @@
 import {Action} from '@ngrx/store';
 import {Book} from '../book'
-import {State, initialState} from '../state/state';
 import {List} from 'immutable';
 
 
-const addBook = (state  = initialState.books, action : Action)=>{
+const addBook = (books : List<Book>, action : Action)=>{
     let book = action.payload;
-    return state.push(book);
-}
-/*const deleteBook = (state , action : Action)=>{
+    return books.push(book);
+};
+const removeBook = (books : List<Book> , action : Action)=>{
     let id = action.payload;
-    let bookIndex = state.books.findIndex((item)=>{
+    let bookIndex = books.findIndex((item)=>{
         return item.id === id;
-    })
-    return (<any>Object).assign({},state,{books: state.books.delete(bookIndex)});
-}
-const toggleRead = (state : State, action : Action) =>{
+    });
+    return books.delete(bookIndex);
+};
+const toggleReadBook = (books: List<Book>, action :Action)=>{
     let id = action.payload;
-    let bookIndex = state.books.findIndex((item)=>{
+    let index =  books.findIndex((item)=>{
         return item.id === id;
+    });
+    return books.update(index, (item)=>{
+        return (<any>Object).assign({},item,{read : !item.read});
     })
-    let editedBook = (<any>Object).assign({},state.books.get(bookIndex),{read: true});
-    return (<any>Object).assign({},state, {books: state.books.set(bookIndex,editedBook)});
-}*/
 
+};
 
-
-export const booksReducer = (state, action : Action)=>{
+export const booksReducer = (books : List<Book> = List([]), action : Action)=>{
     switch(action.type){
         case 'ADD_BOOK': {
-            return addBook(state,action);
+            return addBook(books,action);
         }
-        /*case 'DEL_BOOK': {
-            deleteBook(state,action);
+        case 'REMOVE_BOOK': {
+            return removeBook(books,action);
         }
         case 'TOGGLE_READ' : {
-            toggleRead(state,action);
-        }*/
+            return toggleReadBook(books, action);
+        }
         default : {
-            return state;
+            return books;
         }
     }
-}
+};
