@@ -25,6 +25,15 @@ const toggleReadBook = (books: List<Book>, action :Action)=>{
 
 };
 
+const updateBook = (books: List<Book>, action: Action) => {
+    let id = action.payload;
+    let index =  books.findIndex((item)=>{
+        return item.id === id;
+    });
+    return books.update(index, (item)=>{
+        return (<any>Object).assign({},item,action.payload);
+    })
+};
 export const booksReducer = (books : List<Book> = List([]), action : Action)=>{
     switch(action.type){
         case 'ADD_BOOK': {
@@ -35,6 +44,9 @@ export const booksReducer = (books : List<Book> = List([]), action : Action)=>{
         }
         case 'TOGGLE_READ' : {
             return toggleReadBook(books, action);
+        }
+        case 'UPDATE_BOOK' : {
+            return updateBook(books, action);
         }
         default : {
             return books;

@@ -1,10 +1,12 @@
 <ul style="list-style: none;">
     <li *ngFor="let book of books" style="border: 1px solid red; padding: 5px;">
         <label for="input-book-title">Title</label>
-        <input type="text" id="input-book-title" [value]="book.title" readonly><br>
+        <input #inputTitle (change)="updatePartialBook(inputTitle.value, null)" type="text" id="input-book-title" [(ngModel)]="book.title" [readonly]="updateMode.updatingBook !== book.id"><br>
         <label for="input-book-author">Author</label>
-        <input type="text" id="input-book-author" [value]="book.author" readonly><br>
+        <input #inputAuthor (change)="updatePartialBook(null, inputAuthor.value)" type="text" id="input-book-author" [(ngModel)]="book.author" [readonly]="updateMode.updatingBook !== book.id"><br>
         <input type="checkbox" [checked]="book.read" (change)="toggleReadBook(book.id)"><br>
         <button (click)="removeBook(book.id)">Remove book</button>
+        <button (click)="toggleUpdateMode(book.id)" [hidden]="updateMode.updatingBook === book.id">edit book</button>
+        <button (click)="updateBook(book)" [hidden]="updateMode.updatingBook !== book.id">save changes</button>
     </li>
 </ul>

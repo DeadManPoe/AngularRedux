@@ -19,4 +19,10 @@ export class BooksActionBuilder {
             payload: bookId
         }
     }
+    static updateBook(book : Book){
+        return {
+            type: 'UPDATE_BOOK',
+            payload: book
+        }
+    }
 }
