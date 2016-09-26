@@ -16,16 +16,14 @@ export class BookListComponent {
     @Input() books: Observable<any>;
     public partialBook : PartialBook;
 
-    public updateMode : UpdateMode;
+    public updatingBookId : number;
 
     constructor(private _store: Store<State> ) {
         this.partialBook = {
             author : '',
             title : ''
         };
-        this.updateMode = {
-            updatingBook : 0
-        };
+        this.updatingBookId = 0;
     }
     updatePartialBook(title: string, author: string){
         if(author){
@@ -35,8 +33,11 @@ export class BookListComponent {
             this.partialBook.title = title;
         }
     }
-    toggleUpdateMode(id : number){
-        this.updateMode.updatingBook = id;
+    compareBookIds(book: Book){
+        return book.id === this.updatingBookId;
+    }
+    setUpdatingBookId(id : number){
+        this.updatingBookId = id;
     }
     removeBook(bookId : number) {
         this._store.dispatch(BooksActionBuilder.removeBook(bookId));
@@ -46,15 +47,11 @@ export class BookListComponent {
         this._store.dispatch(BooksActionBuilder.toggleRead(bookId));
     }
     updateBook(book : Book){
-        this.toggleUpdateMode(0);
+        this.setUpdatingBookId(0);
         var obj = (<any>Object).assign({},book,this.partialBook);
-        console.log(obj);
+        //Change state
         this._store.dispatch(BooksActionBuilder.updateBook(obj));
-        this._store.take(1).subscribe(s => console.log(s));
     }
-}
-interface UpdateMode{
-    updatingBook : number,
 }
 interface PartialBook{
     title : string,
