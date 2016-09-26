@@ -49,6 +49,7 @@ export class BookListComponent {
         this.toggleUpdateMode(0);
         var obj = (<any>Object).assign({},book,this.partialBook);
         console.log(obj);
+        this._store.dispatch(BooksActionBuilder.updateBook(obj));
         this._store.take(1).subscribe(s => console.log(s));
     }
 }
