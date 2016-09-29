@@ -4,5 +4,7 @@
 </p>
 <h3>current filter: {{filter | async}}</h3>
 <button (click)="toggleReadFilter()">toggle_completed</button>
-<app-book-list [books]="books | async"></app-book-list>
+<app-book-list (bookToBeUpdated)="open($event)" [books]="books | async"></app-book-list>
+<app-edit-book [sourceBook]="exchangeBook">
+</app-edit-book>
 

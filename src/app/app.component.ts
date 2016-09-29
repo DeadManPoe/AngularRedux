@@ -5,6 +5,7 @@ import {State} from './state/state'
 import {BooksActionBuilder} from "./state/books-action-builder";
 import {FilterActionBuilder} from "./state/filter-action-builder";
 import {combineLatest} from "rxjs/observable/combineLatest";
+import {Book} from "./book";
 
 
 @Component({
@@ -15,12 +16,19 @@ import {combineLatest} from "rxjs/observable/combineLatest";
 export class AppComponent {
     public books: Observable<any>;
     public filter: Observable<any>;
+    public exchangeBook : Book;
     private id: number;
     public title: string;
     public author: string;
 
     constructor(private _store: Store<State>) {
-
+        this.exchangeBook = {
+            id : 0,
+            title : '',
+            author : '',
+            cover : '',
+            read : false
+        };
         this.filter = _store.select('filter');
         this.books = combineLatest(
             _store.select('books'),
@@ -36,6 +44,9 @@ export class AppComponent {
             });
 
         this.id = 0;
+    }
+    open(book: Book) {
+        this.exchangeBook = book;
     }
 
     addBook() {

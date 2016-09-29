@@ -9,13 +9,15 @@ import {filtersReducer} from './state/filters-reducer';
 import {booksReducer} from './state/books-reducer';
 import {BookListComponent} from './book-list/book-list.component';
 import {BookFormComponent} from './book-form/book-form.component';
+import { EditBookComponent } from './edit-book/edit-book.component';
 
 
 @NgModule({
     declarations: [
         AppComponent,
         BookListComponent,
-        BookFormComponent
+        BookFormComponent,
+        EditBookComponent
     ],
     imports: [
         BrowserModule,

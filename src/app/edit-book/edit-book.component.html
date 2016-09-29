@@ -1,0 +1,17 @@
+<form [formGroup]="updateForm" novalidate (ngSubmit)="update(updateForm.value, updateForm.valid)" [hidden]="isHidden">
+    <div>
+        <label for="a"></label>
+        <input formControlName="title" type="text" id="a">
+        <p [hidden]="updateForm.controls['title'].valid">
+            Insert a title</p>
+
+    </div>
+    <div>
+        <label for="b"></label>
+        <input formControlName="author" type="text" id="b">
+        <p [hidden]="updateForm.controls['author'].valid">
+            Insert an author</p>
+
+    </div>
+    <button type="submit">Add book</button>
+</form>

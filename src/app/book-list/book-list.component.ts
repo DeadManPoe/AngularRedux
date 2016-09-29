@@ -1,9 +1,11 @@
-import {Component, Input, ChangeDetectionStrategy} from '@angular/core';
+import {Component, Input, ChangeDetectionStrategy, EventEmitter} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Store} from "@ngrx/store";
 import {State} from "../state/state";
 import {BooksActionBuilder} from "../state/books-action-builder";
 import {Book} from "../book";
+import {List} from "immutable";
+import {Output} from "@angular/core/src/metadata/directives";
 
 
 @Component({
@@ -13,7 +15,9 @@ import {Book} from "../book";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookListComponent {
-    @Input() books: Observable<any>;
+    @Input() books: Observable<List<Book>>;
+    @Output() bookToBeUpdated = new EventEmitter();
+
     public partialBook : PartialBook;
 
     public updatingBookId : number;
@@ -25,20 +29,6 @@ export class BookListComponent {
         };
         this.updatingBookId = 0;
     }
-    updatePartialBook(title: string, author: string){
-        if(author){
-            this.partialBook.author = author;
-        }
-        if(title){
-            this.partialBook.title = title;
-        }
-    }
-    compareBookIds(book: Book){
-        return book.id === this.updatingBookId;
-    }
-    setUpdatingBookId(id : number){
-        this.updatingBookId = id;
-    }
     removeBook(bookId : number) {
         this._store.dispatch(BooksActionBuilder.removeBook(bookId));
     }
@@ -46,11 +36,10 @@ export class BookListComponent {
     toggleReadBook(bookId : number){
         this._store.dispatch(BooksActionBuilder.toggleRead(bookId));
     }
-    updateBook(book : Book){
-        this.setUpdatingBookId(0);
-        var obj = (<any>Object).assign({},book,this.partialBook);
-        //Change state
-        this._store.dispatch(BooksActionBuilder.updateBook(obj));
+
+    emitUpdateEvent(book : Book){
+        alert('dsadas');
+        this.bookToBeUpdated.emit(book);
     }
 }
 interface PartialBook{
