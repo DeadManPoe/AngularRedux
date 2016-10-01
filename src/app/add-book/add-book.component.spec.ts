@@ -1,10 +1,16 @@
 // tslint:disable:no-unused-variable
-import { TestBed, async } from '@angular/core/testing';
-import { AddBookComponent } from './add-book.component';
+import {AddBookComponent} from "./add-book.component";
+import {TestBed} from "@angular/core/testing";
+//Inject angular forms and
 
-describe('Component: BookForm', () => {
-  it('should create an instance', () => {
-    let component = new AddBookComponent(null,null);
-    expect(component).toBeTruthy();
-  });
+describe('Component: AddBook', () => {
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            declarations: [ AddBookComponent ],
+        });
+
+        let fixture = TestBed.createComponent(AddBookComponent);
+        let comp  = fixture.componentInstance;
+
+    });
 });

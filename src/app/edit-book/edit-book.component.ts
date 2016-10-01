@@ -1,4 +1,4 @@
-import {Component, OnInit, SimpleChange, OnChanges} from '@angular/core';
+import {Component, OnInit, SimpleChange, OnChanges} from "@angular/core";
 import {Book} from "../book";
 import {FormBuilder, FormGroup, Validators, FormControl} from "@angular/forms";
 import {Store} from "@ngrx/store";
@@ -12,31 +12,32 @@ import {BookActionBuilder} from "../state/book-action-builder";
     styleUrls: ['./edit-book.component.sass']
 })
 export class EditBookComponent implements OnInit, OnChanges {
-    @Input() sourceBook : Book;
-    public isHidden : boolean;
-    public editForm : FormGroup;
+    @Input() sourceBook: Book;
+    public isHidden: boolean;
+    public editForm: FormGroup;
 
-    constructor(private _fb: FormBuilder, private _store : Store<State>) {
+    constructor(private _fb: FormBuilder, private _store: Store<State>) {
         this.sourceBook = {
-            id : 0,
-            title : '',
-            author : '',
-            cover : '',
-            read : false
+            id: 0,
+            title: '',
+            author: '',
+            cover: '',
+            read: false
         };
         this.isHidden = true;
         this.editForm = this._fb.group({
-            title : new FormControl('',[<any>Validators.required]),
-            author : new FormControl('',[<any>Validators.required])
+            title: new FormControl('', [<any>Validators.required]),
+            author: new FormControl('', [<any>Validators.required])
         });
     }
-    ngOnChanges(changes: {[propKey: string]: SimpleChange}){
-        for(let prop in changes){
-            if(prop === 'sourceBook' && this.sourceBook.id !==0){
+
+    ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
+        for (let prop in changes) {
+            if (prop === 'sourceBook' && this.sourceBook.id !== 0) {
                 console.log(this.sourceBook);
                 this.editForm = this._fb.group({
-                    title : new FormControl(this.sourceBook.title,[<any>Validators.required]),
-                    author : new FormControl(this.sourceBook.author,[<any>Validators.required])
+                    title: new FormControl(this.sourceBook.title, [<any>Validators.required]),
+                    author: new FormControl(this.sourceBook.author, [<any>Validators.required])
                 });
                 this.isHidden = false;
 
@@ -47,12 +48,14 @@ export class EditBookComponent implements OnInit, OnChanges {
     ngOnInit() {
 
     }
-    closeEdit(){
+
+    closeEdit() {
         this.isHidden = true;
     }
-    submitEdit(){
-        if(this.editForm.valid){
-            let targetObj = (<any>Object).assign({},this.sourceBook, this.editForm.value);
+
+    submitEdit() {
+        if (this.editForm.valid) {
+            let targetObj = (<any>Object).assign({}, this.sourceBook, this.editForm.value);
             this._store.dispatch(BookActionBuilder.updateBook(targetObj));
             //confirm msg
             this.isHidden = true;

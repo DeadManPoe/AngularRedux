@@ -1,8 +1,8 @@
 export class FilterActionBuilder {
-    static readFilter(){
+    static readFilter() {
         return {
             type: 'READ_FILTER',
-            payload : null
+            payload: null
         }
     }
 }

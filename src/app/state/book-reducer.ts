@@ -1,46 +1,46 @@
-import {Action} from '@ngrx/store';
-import {Book} from '../book'
-import {List} from 'immutable';
+import {Action} from "@ngrx/store";
+import {Book} from "../book";
+import {List} from "immutable";
 
 
-const addBook = (books : List<Book>, action : Action)=>{
+const addBook = (books: List<Book>, action: Action)=> {
     let book = action.payload;
     return books.push(book);
 };
-const removeBook = (books : List<Book> , action : Action)=>{
+const removeBook = (books: List<Book>, action: Action)=> {
     let id = action.payload;
-    let bookIndex = books.findIndex((item)=>{
+    let bookIndex = books.findIndex((item)=> {
         return item.id === id;
     });
     return books.delete(bookIndex);
 };
-const toggleReadBook = (books: List<Book>, action :Action)=>{
+const toggleReadBook = (books: List<Book>, action: Action)=> {
     let id = action.payload;
-    let index =  books.findIndex((item)=>{
+    let index = books.findIndex((item)=> {
         return item.id === id;
     });
-    return books.update(index, (item)=>{
-        return (<any>Object).assign({},item,{read : !item.read});
+    return books.update(index, (item)=> {
+        return (<any>Object).assign({}, item, {read: !item.read});
     })
 
 };
 
 const updateBook = (books: List<Book>, action: Action) => {
     let id = action.payload;
-    let index =  books.findIndex((item)=>{
+    let index = books.findIndex((item)=> {
         return item.id === id;
     });
-    return books.update(index, (item)=>{
-        return (<any>Object).assign({},item,action.payload);
+    return books.update(index, (item)=> {
+        return (<any>Object).assign({}, item, action.payload);
     })
 };
-export const booksReducer = (books : List<Book> = List([]), action : Action)=>{
-    switch(action.type){
+export const booksReducer = (books: List<Book> = List([]), action: Action)=> {
+    switch (action.type) {
         case 'ADD_BOOK': {
-            return addBook(books,action);
+            return addBook(books, action);
         }
         case 'REMOVE_BOOK': {
-            return removeBook(books,action);
+            return removeBook(books, action);
         }
         case 'TOGGLE_READ' : {
             return toggleReadBook(books, action);

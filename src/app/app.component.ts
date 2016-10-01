@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {Observable} from 'rxjs';
-import {Store} from '@ngrx/store'
-import {State} from './state/state'
+import {Component} from "@angular/core";
+import {Observable} from "rxjs";
+import {Store} from "@ngrx/store";
+import {State} from "./state/state";
 import {combineLatest} from "rxjs/observable/combineLatest";
 import {Book} from "./book";
 
@@ -14,18 +14,18 @@ import {Book} from "./book";
 export class AppComponent {
     public books: Observable<any>;
     public filter: Observable<any>;
-    public exchangeBook : Book;
+    public exchangeBook: Book;
     private id: number;
     public title: string;
     public author: string;
 
     constructor(private _store: Store<State>) {
         this.exchangeBook = {
-            id : 0,
-            title : '',
-            author : '',
-            cover : '',
-            read : false
+            id: 0,
+            title: '',
+            author: '',
+            cover: '',
+            read: false
         };
         this.filter = _store.select('filter');
         this.books = combineLatest(
@@ -41,6 +41,7 @@ export class AppComponent {
 
         this.id = 0;
     }
+
     editBook(book: Book) {
         this.exchangeBook = book;
     }

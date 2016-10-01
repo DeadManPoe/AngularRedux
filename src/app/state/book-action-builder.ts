@@ -1,25 +1,28 @@
 import {Book} from "../book";
 export class BookActionBuilder {
 
-    static addBook(book : Book){
+    static addBook(book: Book) {
         return {
             type: 'ADD_BOOK',
-            payload : book
+            payload: book
         }
     }
-    static removeBook(bookId : number){
+
+    static removeBook(bookId: number) {
         return {
             type: 'REMOVE_BOOK',
             payload: bookId
         }
     }
-    static toggleRead(bookId: number){
+
+    static toggleRead(bookId: number) {
         return {
             type: 'TOGGLE_READ',
             payload: bookId
         }
     }
-    static updateBook(book : Book){
+
+    static updateBook(book: Book) {
         return {
             type: 'UPDATE_BOOK',
             payload: book
