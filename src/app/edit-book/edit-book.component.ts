@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators, FormControl} from "@angular/forms";
 import {Store} from "@ngrx/store";
 import {State} from "../state/state";
 import {Input} from "@angular/core/src/metadata/directives";
+import {BookActionBuilder} from "../state/book-action-builder";
 
 @Component({
     selector: 'app-edit-book',
@@ -13,7 +14,7 @@ import {Input} from "@angular/core/src/metadata/directives";
 export class EditBookComponent implements OnInit, OnChanges {
     @Input() sourceBook : Book;
     public isHidden : boolean;
-    public updateForm : FormGroup;
+    public editForm : FormGroup;
 
     constructor(private _fb: FormBuilder, private _store : Store<State>) {
         this.sourceBook = {
@@ -24,7 +25,7 @@ export class EditBookComponent implements OnInit, OnChanges {
             read : false
         };
         this.isHidden = true;
-        this.updateForm = this._fb.group({
+        this.editForm = this._fb.group({
             title : new FormControl('',[<any>Validators.required]),
             author : new FormControl('',[<any>Validators.required])
         });
@@ -33,7 +34,7 @@ export class EditBookComponent implements OnInit, OnChanges {
         for(let prop in changes){
             if(prop === 'sourceBook' && this.sourceBook.id !==0){
                 console.log(this.sourceBook);
-                this.updateForm = this._fb.group({
+                this.editForm = this._fb.group({
                     title : new FormControl(this.sourceBook.title,[<any>Validators.required]),
                     author : new FormControl(this.sourceBook.author,[<any>Validators.required])
                 });
@@ -46,14 +47,16 @@ export class EditBookComponent implements OnInit, OnChanges {
     ngOnInit() {
 
     }
-    update(values : UpdateBookValue, isValid : boolean){
-        if(isValid){
-            console.log()
+    closeEdit(){
+        this.isHidden = true;
+    }
+    submitEdit(){
+        if(this.editForm.valid){
+            let targetObj = (<any>Object).assign({},this.sourceBook, this.editForm.value);
+            this._store.dispatch(BookActionBuilder.updateBook(targetObj));
+            //confirm msg
+            this.isHidden = true;
         }
     }
 
-}
-interface UpdateBookValue {
-    title : string,
-    author : string
 }

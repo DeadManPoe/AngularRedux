@@ -5,10 +5,10 @@ import {HttpModule} from '@angular/http';
 import {AppComponent} from './app.component';
 import {StoreModule} from '@ngrx/store';
 import {initialState} from './state/state';
-import {filtersReducer} from './state/filters-reducer';
-import {booksReducer} from './state/books-reducer';
+import {filtersReducer} from './state/filter-reducer';
+import {booksReducer} from './state/book-reducer';
 import {BookListComponent} from './book-list/book-list.component';
-import {BookFormComponent} from './book-form/book-form.component';
+import {AddBookComponent} from './add-book/add-book.component';
 import { EditBookComponent } from './edit-book/edit-book.component';
 
 
@@ -16,7 +16,7 @@ import { EditBookComponent } from './edit-book/edit-book.component';
     declarations: [
         AppComponent,
         BookListComponent,
-        BookFormComponent,
+        AddBookComponent,
         EditBookComponent
     ],
     imports: [

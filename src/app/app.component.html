@@ -1,10 +1,5 @@
-<app-book-form></app-book-form>
-<p>
-    book-list works!
-</p>
-<h3>current filter: {{filter | async}}</h3>
-<button (click)="toggleReadFilter()">toggle_completed</button>
-<app-book-list (bookToBeUpdated)="open($event)" [books]="books | async"></app-book-list>
+<app-add-book></app-add-book>
+<app-book-list (bookToBeEdited)="editBook($event)" [filter]="filter | async" [books]="books | async"></app-book-list>
 <app-edit-book [sourceBook]="exchangeBook">
 </app-edit-book>
 

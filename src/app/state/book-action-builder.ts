@@ -1,5 +1,5 @@
 import {Book} from "../book";
-export class BooksActionBuilder {
+export class BookActionBuilder {
 
     static addBook(book : Book){
         return {

@@ -8,18 +8,18 @@
     }
 </style>
 <h2>Insert a book</h2>
-<form [formGroup]="addBookForm" novalidate (ngSubmit)="save(addBookForm.value, addBookForm.valid)">
+<form [formGroup]="addBookForm" novalidate (ngSubmit)="submitAdd()">
     <div>
         <label for="input-book-title"></label>
         <input formControlName="title" type="text" id="input-book-title">
-        <p [ngClass]="{'display': addBookForm.controls['title'].invalid && (formSubmitted || addBookForm.controls['title'].dirty)}">
+        <p [ngClass]="{'display': addBookForm.controls['title'].invalid && addBookForm.controls['title'].dirty}">
             Insert a title</p>
 
     </div>
     <div>
         <label for="input-book-author"></label>
         <input formControlName="author" type="text" id="input-book-author">
-        <p [ngClass]="{'display': addBookForm.controls['author'].invalid && (formSubmitted || addBookForm.controls['author'].dirty)}">
+        <p [ngClass]="{'display': addBookForm.controls['author'].invalid && addBookForm.controls['author'].dirty}">
             Insert an author</p>
 
     </div>
