@@ -1,24 +1,15 @@
-<style>
-    p {
-        display: none;
-    }
-
-    p.display {
-        display: block;
-    }
-</style>
-<h2>Insert a book</h2>
 <form [formGroup]="addBookForm" novalidate (ngSubmit)="submitAdd()">
+    <h2>Insert a book</h2>
     <div>
         <label for="input-book-title"></label>
-        <input formControlName="title" type="text" id="input-book-title">
+        <input placeholder="Title" formControlName="title" type="text" id="input-book-title">
         <p [ngClass]="{'display': addBookForm.controls['title'].invalid && addBookForm.controls['title'].dirty}">
             Insert a title</p>
 
     </div>
     <div>
         <label for="input-book-author"></label>
-        <input formControlName="author" type="text" id="input-book-author">
+        <input placeholder="Author" formControlName="author" type="text" id="input-book-author">
         <p [ngClass]="{'display': addBookForm.controls['author'].invalid && addBookForm.controls['author'].dirty}">
             Insert an author</p>
 
