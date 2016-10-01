@@ -1,5 +1,5 @@
-<h3>Filer : {{filter}}</h3>
-<button (click)="toggleReadFilter()">Toggle filter</button>
+<h3>FILTER : {{filter}}</h3>
+<button id="aba" (click)="toggleReadFilter()">Toggle filter</button>
 <ul style="list-style: none;">
     <li *ngFor="let book of books" style="border: 1px solid red; padding: 5px;">
         <p>{{book.title}}</p>

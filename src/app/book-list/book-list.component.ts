@@ -16,8 +16,8 @@ import {FilterActionBuilder} from "../state/filter-action-builder";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookListComponent {
-    @Input() books: Observable<List<Book>>;
-    @Input() filter: Observable<string>;
+    @Input() books: List<Book>;
+    @Input() filter: string;
     @Output() bookToBeEdited = new EventEmitter();
 
     constructor(private _store: Store<State>) {

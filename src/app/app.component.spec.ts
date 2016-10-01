@@ -5,6 +5,11 @@ import {AppComponent} from "./app.component";
 import {BookListComponent} from "./book-list/book-list.component";
 import {AddBookComponent} from "./add-book/add-book.component";
 import {EditBookComponent} from "./edit-book/edit-book.component";
+import {FormBuilder} from "@angular/forms";
+import {Store, Action, provideStore, StoreModule} from "@ngrx/store";
+import {State, initialState} from "./state/state";
+import {booksReducer} from "./state/book-reducer";
+import {filtersReducer} from "./state/filter-reducer";
 
 describe('App: ReduxAngular', () => {
     beforeEach(() => {
@@ -15,6 +20,7 @@ describe('App: ReduxAngular', () => {
                 AddBookComponent,
                 EditBookComponent
             ],
+            providers : [FormBuilder]
         });
     });
 
