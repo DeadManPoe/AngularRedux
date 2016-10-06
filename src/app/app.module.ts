@@ -10,14 +10,15 @@ import {booksReducer} from "./state/book-reducer";
 import {BookListComponent} from "./book-list/book-list.component";
 import {AddBookComponent} from "./add-book/add-book.component";
 import {EditBookComponent} from "./edit-book/edit-book.component";
-
+import { BookSearchComponent } from './book-search/book-search.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         BookListComponent,
         AddBookComponent,
-        EditBookComponent
+        EditBookComponent,
+        BookSearchComponent
     ],
     imports: [
         BrowserModule,

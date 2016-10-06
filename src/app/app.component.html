@@ -1,14 +1,6 @@
-<nav>
-    <div class="nav-brand">
-
-    </div>
-</nav>
-
-<div class="body">
-    <app-add-book></app-add-book>
-    <app-book-list (bookToBeEdited)="editBook($event)" [filter]="filter | async" [books]="books | async"></app-book-list>
-</div>
-
+<app-add-book></app-add-book>
+<app-book-list (bookToBeEdited)="editBook($event)" [filter]="filter | async" [books]="books | async"></app-book-list>
 <app-edit-book [sourceBook]="exchangeBook">
 </app-edit-book>
+<app-book-search></app-book-search>
 
