@@ -12,6 +12,7 @@ import {Book} from "./book";
     styleUrls: ['./app.component.sass'],
 })
 export class AppComponent {
+    public query: Observable<any>;
     public books: Observable<any>;
     public filter: Observable<any>;
     public exchangeBook: Book;
@@ -27,6 +28,7 @@ export class AppComponent {
             cover: '',
             read: false
         };
+        this.query = _store.select('query');
         this.filter = _store.select('filter');
         this.books = combineLatest(
             _store.select('books'),

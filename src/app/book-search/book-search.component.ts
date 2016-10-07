@@ -5,6 +5,11 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
+import {Store} from "@ngrx/store";
+import {QueryActionBuilder} from "../state/query-action-builder";
+import {State} from "../state/state";
+import {Observable} from "rxjs";
+import {empty} from "rxjs/observable/empty";
 
 
 
@@ -18,7 +23,7 @@ import 'rxjs/add/operator/map';
 export class BookSearchComponent implements OnInit {
     public searchControl : FormControl;
 
-    constructor(private _gbooksService : GoogleBooksApiService) {
+    constructor(private _gbooksService : GoogleBooksApiService, private _store : Store<State>) {
         this.searchControl = new FormControl('');
     }
 
@@ -26,11 +31,21 @@ export class BookSearchComponent implements OnInit {
         this.searchControl.valueChanges
             .debounceTime(400)
             .distinctUntilChanged()
-            .switchMap(values => this._gbooksService.getSearchResults(values))
-            .map(values => values.items)
+            .switchMap(values =>
+                this.checkInput(values)
+            )
+            //.map(values => values.items)
             .subscribe(results => {
                 console.log(results);
+                this._store.dispatch(QueryActionBuilder.queryBook(results));
             })
+    }
+    checkInput(values){
+        if(values){
+            return this._gbooksService.getSearchResults(values);
+        }
+        this._store.dispatch(QueryActionBuilder.queryBook([]));
+        return empty();
     }
 
 }

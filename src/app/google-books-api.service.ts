@@ -10,7 +10,7 @@ export class GoogleBooksApiService {
     }
 
     getSearchResults(searchText: string) {
-        return this._http.get(URL+searchText).map(values => values.json());
+        return this._http.get(URL+searchText).map(values => values.json().items);
     }
 
 }

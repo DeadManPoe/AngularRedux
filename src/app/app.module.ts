@@ -11,6 +11,7 @@ import {BookListComponent} from "./book-list/book-list.component";
 import {AddBookComponent} from "./add-book/add-book.component";
 import {EditBookComponent} from "./edit-book/edit-book.component";
 import { BookSearchComponent } from './book-search/book-search.component';
+import {queryBookReducer} from "./state/query-book-reducer";
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import { BookSearchComponent } from './book-search/book-search.component';
         ReactiveFormsModule,
         HttpModule,
         StoreModule.provideStore({
+            query : queryBookReducer,
             books: booksReducer,
             filter: filtersReducer
         }, initialState)
