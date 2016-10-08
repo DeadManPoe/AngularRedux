@@ -28,7 +28,7 @@ export class BookSearchComponent implements OnInit {
 
     ngOnInit() {
         this.searchControl.valueChanges
-            .debounceTime(400)
+            .debounceTime(200)
             .distinctUntilChanged()
             .switchMap(values =>
                 this.checkInput(values)
