@@ -8,7 +8,6 @@ import 'rxjs/add/operator/map';
 import {Store} from "@ngrx/store";
 import {QueryActionBuilder} from "../state/query-action-builder";
 import {State} from "../state/state";
-import {Observable} from "rxjs";
 import {empty} from "rxjs/observable/empty";
 
 
@@ -34,13 +33,13 @@ export class BookSearchComponent implements OnInit {
             .switchMap(values =>
                 this.checkInput(values)
             )
-            //.map(values => values.items)
             .subscribe(results => {
-                console.log(results);
                 this._store.dispatch(QueryActionBuilder.queryBook(results));
             })
     }
     checkInput(values){
+        console.log(values);
+        this._store.dispatch(QueryActionBuilder.setQueryKeywords(values));
         if(values){
             return this._gbooksService.getSearchResults(values);
         }

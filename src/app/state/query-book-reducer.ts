@@ -10,7 +10,7 @@ export const queryBookReducer = (queryResults : List<any>, action : Action )=>{
             return queryBook(queryResults, action);
         }
         default : {
-            return List([]);
+            return queryResults;
         }
     }
 };

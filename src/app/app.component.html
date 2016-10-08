@@ -3,10 +3,10 @@
 <app-edit-book [sourceBook]="exchangeBook">
 </app-edit-book>
 <app-book-search></app-book-search>
-{{query.queryText}}
+<h2>Keywords: {{queryKeywords | async}}</h2>
 <ul>
-    <li *ngFor="let item of query | async">
-        {{item}}
+    <li *ngFor="let item of queryResults | async">
+        {{item | json}}
     </li>
 </ul>
 

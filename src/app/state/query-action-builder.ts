@@ -6,4 +6,10 @@ export class QueryActionBuilder {
             payload : results
         }
     }
+    static setQueryKeywords(keywords : string){
+        return {
+            type : 'SET_KEYWORDS',
+            payload : keywords
+        }
+    }
 }

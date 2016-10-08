@@ -12,6 +12,7 @@ import {AddBookComponent} from "./add-book/add-book.component";
 import {EditBookComponent} from "./edit-book/edit-book.component";
 import { BookSearchComponent } from './book-search/book-search.component';
 import {queryBookReducer} from "./state/query-book-reducer";
+import {queryKeywordsReducer} from "./state/query-keywords-reducer";
 
 @NgModule({
     declarations: [
@@ -27,7 +28,8 @@ import {queryBookReducer} from "./state/query-book-reducer";
         ReactiveFormsModule,
         HttpModule,
         StoreModule.provideStore({
-            query : queryBookReducer,
+            queryKeywords : queryKeywordsReducer,
+            queryResults : queryBookReducer,
             books: booksReducer,
             filter: filtersReducer
         }, initialState)

@@ -12,7 +12,8 @@ import {Book} from "./book";
     styleUrls: ['./app.component.sass'],
 })
 export class AppComponent {
-    public query: Observable<any>;
+    public queryKeywords : Observable<any>;
+    public queryResults: Observable<any>;
     public books: Observable<any>;
     public filter: Observable<any>;
     public exchangeBook: Book;
@@ -28,7 +29,8 @@ export class AppComponent {
             cover: '',
             read: false
         };
-        this.query = _store.select('query');
+        this.queryKeywords = _store.select('queryKeywords');
+        this.queryResults = _store.select('queryResults');
         this.filter = _store.select('filter');
         this.books = combineLatest(
             _store.select('books'),
@@ -36,7 +38,6 @@ export class AppComponent {
             (books, filter)=> {
                 return books.filter((val)=> {
                     return !(filter === 'READ_FILTER' && !val.read);
-
 
                 })
             });

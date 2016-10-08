@@ -8,7 +8,7 @@ const readFilter = (filter: string, action: Action)=> {
         return 'READ_FILTER'
     }
 };
-export const filtersReducer = (filter: string = 'NONE', action: Action)=> {
+export const filtersReducer = (filter: string, action: Action)=> {
     switch (action.type) {
         case 'READ_FILTER': {
             return readFilter(filter, action);
