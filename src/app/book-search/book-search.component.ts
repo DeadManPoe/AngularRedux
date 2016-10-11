@@ -38,7 +38,6 @@ export class BookSearchComponent implements OnInit {
             })
     }
     checkInput(values){
-        console.log(values);
         this._store.dispatch(QueryActionBuilder.setQueryKeywords(values));
         if(values){
             return this._gbooksService.getSearchResults(values);

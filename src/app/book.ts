@@ -4,4 +4,5 @@ export interface Book {
     author: string,
     cover: string,
     read: boolean
+
 }

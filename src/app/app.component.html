@@ -16,7 +16,7 @@
             <p>{{item.volumeInfo.subtitle}}</p>
             <h6 [hidden]="!item.volumeInfo.description">Description</h6>
             <p>{{item.volumeInfo.description}}</p>
-
+            <button (click)="addBook(item.volumeInfo)">Add book</button>
         </div>
         <br>
 

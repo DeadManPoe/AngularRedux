@@ -4,6 +4,7 @@ import {Store} from "@ngrx/store";
 import {State} from "./state/state";
 import {combineLatest} from "rxjs/observable/combineLatest";
 import {Book} from "./book";
+import {BookActionBuilder} from "./state/book-action-builder";
 
 
 @Component({
@@ -47,5 +48,15 @@ export class AppComponent {
 
     editBook(book: Book) {
         this.exchangeBook = book;
+    }
+    addBook(volumeInfo : any){
+        var obj : Book = {
+            id : 4,
+            title : volumeInfo.title,
+            author : volumeInfo.authors[0],
+            cover : volumeInfo.imageLinks.thumbnail || '',
+            read : false
+        };
+        this._store.dispatch(BookActionBuilder.addBook(obj));
     }
 }

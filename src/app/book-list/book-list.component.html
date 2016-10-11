@@ -4,6 +4,9 @@
     <li *ngFor="let book of books" style="border: 1px solid red; padding: 5px;">
         <p>{{book.title}}</p>
         <p>{{book.author}}</p>
+        <div *ngIf="book.cover">
+            <img [src]="book.cover" alt="">
+        </div>
         <input type="checkbox" [checked]="book.read" (change)="toggleReadBook(book.id)"><br>
         <button (click)="removeBook(book.id)">Remove book</button>
         <button (click)="emitEditEvent(book)">edit book</button>
