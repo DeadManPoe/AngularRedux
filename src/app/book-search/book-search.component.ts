@@ -9,6 +9,7 @@ import {Store} from "@ngrx/store";
 import {QueryActionBuilder} from "../state/query-action-builder";
 import {State} from "../state/state";
 import {empty} from "rxjs/observable/empty";
+import {Observable} from "rxjs";
 
 
 
@@ -21,9 +22,13 @@ import {empty} from "rxjs/observable/empty";
 })
 export class BookSearchComponent implements OnInit {
     public searchControl : FormControl;
+    public queryResults : Observable<any>;
+    public queryKeywords : Observable<any>;
 
     constructor(private _gbooksService : GoogleBooksApiService, private _store : Store<State>) {
         this.searchControl = new FormControl('');
+        this.queryResults = this._store.select('queryResults');
+        this.queryKeywords = this._store.select('queryKeywords');
     }
 
     ngOnInit() {

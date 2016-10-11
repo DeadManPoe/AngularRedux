@@ -16,11 +16,12 @@ import {FilterActionBuilder} from "../state/filter-action-builder";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookListComponent {
-    @Input() books: List<Book>;
-    @Input() filter: string;
-    @Output() bookToBeEdited = new EventEmitter();
+    public books : Observable<any>;
+    public filter : Observable<any>;
 
     constructor(private _store: Store<State>) {
+        this.books = _store.select('books');
+        this.filter = _store.select('filter');
     }
 
     removeBook(bookId: number) {
@@ -34,9 +35,5 @@ export class BookListComponent {
     toggleReadFilter() {
         this._store.dispatch(FilterActionBuilder.readFilter());
 
-    }
-
-    emitEditEvent(book: Book) {
-        this.bookToBeEdited.emit(book);
     }
 }

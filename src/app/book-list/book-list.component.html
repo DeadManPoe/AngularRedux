@@ -1,7 +1,7 @@
-<h3>FILTER : {{filter}}</h3>
+<h3>FILTER : {{filter | async}}</h3>
 <button id="aba" (click)="toggleReadFilter()">Toggle filter</button>
 <ul style="list-style: none;">
-    <li *ngFor="let book of books" style="border: 1px solid red; padding: 5px;">
+    <li *ngFor="let book of books | async" style="border: 1px solid red; padding: 5px;">
         <p>{{book.title}}</p>
         <p>{{book.author}}</p>
         <div *ngIf="book.cover">
@@ -9,6 +9,5 @@
         </div>
         <input type="checkbox" [checked]="book.read" (change)="toggleReadBook(book.id)"><br>
         <button (click)="removeBook(book.id)">Remove book</button>
-        <button (click)="emitEditEvent(book)">edit book</button>
     </li>
 </ul>

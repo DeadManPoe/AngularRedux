@@ -13,6 +13,9 @@ import {EditBookComponent} from "./edit-book/edit-book.component";
 import { BookSearchComponent } from './book-search/book-search.component';
 import {queryBookReducer} from "./state/query-book-reducer";
 import {queryKeywordsReducer} from "./state/query-keywords-reducer";
+import {RouterModule} from "@angular/router";
+import {routes} from "./routes";
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
     declarations: [
@@ -20,13 +23,15 @@ import {queryKeywordsReducer} from "./state/query-keywords-reducer";
         BookListComponent,
         AddBookComponent,
         EditBookComponent,
-        BookSearchComponent
+        BookSearchComponent,
+        HomeComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,
         HttpModule,
+        RouterModule.forRoot(routes),
         StoreModule.provideStore({
             queryKeywords : queryKeywordsReducer,
             queryResults : queryBookReducer,

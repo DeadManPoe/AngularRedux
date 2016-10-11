@@ -1,7 +1,20 @@
-<h1>Search books</h1>
-<form action="#">
-    <input type="search" [formControl]="searchControl">
-</form>
+<h2>Search</h2>
+<input type="search" [formControl]="searchControl">
+<h2>Keywords: {{queryKeywords | async}}</h2>
 <ul>
-   <li></li>
+    <li *ngFor="let item of queryResults | async">
+        <div>
+            <img *ngIf="item.volumeInfo.imageLinks" [src]="item.volumeInfo.imageLinks.thumbnail" alt="">
+            <h6>Authors</h6>
+            <p *ngFor="let author of item.volumeInfo.authors">{{author}}</p>
+            <h6>Title</h6>
+            <p>{{item.volumeInfo.title}}</p>
+            <h6 [hidden]="!item.volumeInfo.subtitle">Subtitle</h6>
+            <p>{{item.volumeInfo.subtitle}}</p>
+            <h6 [hidden]="!item.volumeInfo.description">Description</h6>
+            <p>{{item.volumeInfo.description}}</p>
+            <button (click)="addBook(item.volumeInfo)">Add book</button>
+        </div>
+        <br>
+    </li>
 </ul>

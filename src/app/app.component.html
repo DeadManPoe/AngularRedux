@@ -1,26 +1,3 @@
-<app-add-book></app-add-book>
-<app-book-list (bookToBeEdited)="editBook($event)" [filter]="filter | async" [books]="books | async"></app-book-list>
-<app-edit-book [sourceBook]="exchangeBook">
-</app-edit-book>
-<app-book-search></app-book-search>
-<h2>Keywords: {{queryKeywords | async}}</h2>
-<ul>
-    <li *ngFor="let item of queryResults | async">
-        <div>
-            <img *ngIf="item.volumeInfo.imageLinks" [src]="item.volumeInfo.imageLinks.thumbnail" alt="">
-            <h6>Authors</h6>
-            <p *ngFor="let author of item.volumeInfo.authors">{{author}}</p>
-            <h6>Title</h6>
-            <p>{{item.volumeInfo.title}}</p>
-            <h6 [hidden]="!item.volumeInfo.subtitle">Subtitle</h6>
-            <p>{{item.volumeInfo.subtitle}}</p>
-            <h6 [hidden]="!item.volumeInfo.description">Description</h6>
-            <p>{{item.volumeInfo.description}}</p>
-            <button (click)="addBook(item.volumeInfo)">Add book</button>
-        </div>
-        <br>
-
-
-    </li>
-</ul>
-
+<h1>It works</h1>
+<router-outlet>
+</router-outlet>
