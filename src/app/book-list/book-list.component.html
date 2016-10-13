@@ -1,5 +1,3 @@
-<h3>FILTER : {{filter | async}}</h3>
-<button id="aba" (click)="toggleReadFilter()">Toggle filter</button>
 <ul style="list-style: none;">
     <li *ngFor="let book of books | async" style="border: 1px solid red; padding: 5px;">
         <p>{{book.title}}</p>

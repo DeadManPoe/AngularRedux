@@ -7,13 +7,13 @@ import {Book} from "../book";
 import {List} from "immutable";
 import {Output} from "@angular/core/src/metadata/directives";
 import {FilterActionBuilder} from "../state/filter-action-builder";
+import {TryoutServiceService} from "../tryout-service.service";
 
 
 @Component({
     selector: 'app-book-list',
     templateUrl: './book-list.component.html',
-    styleUrls: ['./book-list.component.sass'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: ['./book-list.component.sass']
 })
 export class BookListComponent {
     public books : Observable<any>;

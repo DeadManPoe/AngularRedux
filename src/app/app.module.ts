@@ -16,6 +16,8 @@ import {queryKeywordsReducer} from "./state/query-keywords-reducer";
 import {RouterModule} from "@angular/router";
 import {routes} from "./routes";
 import { HomeComponent } from './home/home.component';
+import {TryoutServiceService} from "./tryout-service.service";
+import { BooksCollectionComponent } from './books-collection/books-collection.component';
 
 @NgModule({
     declarations: [
@@ -24,7 +26,8 @@ import { HomeComponent } from './home/home.component';
         AddBookComponent,
         EditBookComponent,
         BookSearchComponent,
-        HomeComponent
+        HomeComponent,
+        BooksCollectionComponent
     ],
     imports: [
         BrowserModule,
@@ -39,7 +42,7 @@ import { HomeComponent } from './home/home.component';
             filter: filtersReducer
         }, initialState)
     ],
-    providers: [],
+    providers: [TryoutServiceService],
     bootstrap: [AppComponent]
 })
 export class AppModule {
