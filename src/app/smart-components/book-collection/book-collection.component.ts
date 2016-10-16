@@ -1,11 +1,11 @@
 import {Component} from "@angular/core";
 import {Store} from "@ngrx/store";
-import {State} from "../state/state";
+import {State} from "../../state/state";
 import {Observable} from "rxjs";
-import {BookActionBuilder} from "../state/book-action-builder";
-import {FilterMap} from "../filter-map";
-import {FilterActionBuilder} from "../state/filter-action-builder";
-import {Book} from "../book";
+import {BookActionBuilder} from "../../state/book-action-builder";
+import {FilterMap} from "../../filter-map";
+import {FilterActionBuilder} from "../../state/filter-action-builder";
+import {Book} from "../../book";
 import {combineLatest} from "rxjs/observable/combineLatest";
 
 @Component({

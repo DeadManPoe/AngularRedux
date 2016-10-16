@@ -1,13 +1,13 @@
 import {Component, OnInit, EventEmitter, ChangeDetectionStrategy} from "@angular/core";
 import {FormGroup, FormControl, FormBuilder, Validators} from "@angular/forms";
 import {Store} from "@ngrx/store";
-import {State} from "../state/state";
+import {State} from "../../state/state";
 import {Output} from "@angular/core/src/metadata/directives";
 
 @Component({
     selector: 'app-add-book',
-    templateUrl: './add-book.component.html',
-    styleUrls: ['./add-book.component.sass'],
+    templateUrl: 'add-book.component.html',
+    styleUrls: ['add-book.component.sass'],
     changeDetection : ChangeDetectionStrategy.OnPush
 })
 export class AddBookComponent implements OnInit {

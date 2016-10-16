@@ -2,9 +2,9 @@
 
 import {TestBed, async} from "@angular/core/testing";
 import {AppComponent} from "./app.component";
-import {BookListComponent} from "./book-collection/book-collection.component";
-import {AddBookComponent} from "./add-book/add-book.component";
-import {EditBookComponent} from "./edit-book/edit-book.component";
+import {BookListComponent} from "./smart-components/book-collection/book-collection.component";
+import {AddBookComponent} from "./dumb-components/add-book/add-book.component";
+import {EditBookComponent} from "./dumb-components/edit-book/edit-book.component";
 import {FormBuilder} from "@angular/forms";
 import {Store, Action, provideStore, StoreModule} from "@ngrx/store";
 import {State, initialState} from "./state/state";

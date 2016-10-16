@@ -1,8 +1,8 @@
 
-import {BookSearchComponent} from "./book-search/book-search.component";
-import {BookCollectionComponent} from "./book-collection/book-collection.component";
-import {AddBookComponent} from "./add-book/add-book.component";
-import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
+import {BookSearchComponent} from "./smart-components/book-search/book-search.component";
+import {BookCollectionComponent} from "./smart-components/book-collection/book-collection.component";
+import {AddBookComponent} from "./dumb-components/add-book/add-book.component";
+import {PageNotFoundComponent} from "./dumb-components/page-not-found/page-not-found.component";
 
 export const routes = [
     {

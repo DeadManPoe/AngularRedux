@@ -1,23 +1,23 @@
 import {Component, OnInit} from "@angular/core";
 import {FormControl} from "@angular/forms";
-import {GoogleBooksApiService} from "../google-books-api.service";
+import {GoogleBooksApiService} from "../../google-books-api.service";
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
 import {Store} from "@ngrx/store";
-import {QueryActionBuilder} from "../state/query-action-builder";
-import {State} from "../state/state";
+import {QueryActionBuilder} from "../../state/query-action-builder";
+import {State} from "../../state/state";
 import {empty} from "rxjs/observable/empty";
 import {Observable} from "rxjs";
-import {GoogleBook} from "../google-book";
-import {BookActionBuilder} from "../state/book-action-builder";
+import {GoogleBook} from "../../google-book";
+import {BookActionBuilder} from "../../state/book-action-builder";
 
 
 @Component({
     selector: 'app-book-search',
-    templateUrl: './book-search.component.html',
-    styleUrls: ['./book-search.component.sass'],
+    templateUrl: 'book-search.component.html',
+    styleUrls: ['book-search.component.sass'],
     providers : [GoogleBooksApiService]
 })
 export class BookSearchComponent implements OnInit {

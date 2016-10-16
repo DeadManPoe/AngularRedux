@@ -9,6 +9,7 @@ describe('Book reducer tests : ', ()=>{
         title: 'sample_title',
         author : 'sample_author',
         cover : '',
+        description : '',
         read : false
     };
     it('On ADD_BOOK action should return an immutable list with the added book',()=>{
@@ -24,6 +25,7 @@ describe('Book reducer tests : ', ()=>{
             id : 1,
             title : 'updated_title',
             author : 'sample_author',
+            description : '',
             cover : '',
             read : false
         };

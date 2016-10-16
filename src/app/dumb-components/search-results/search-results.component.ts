@@ -1,13 +1,13 @@
-import {Component, OnInit, EventEmitter} from "@angular/core";
+import {Component, OnInit, EventEmitter, ChangeDetectionStrategy} from "@angular/core";
 import {Input, Output} from "@angular/core/src/metadata/directives";
 import {Observable} from "rxjs";
-import {Book} from "../book";
-import {GoogleBook} from "../google-book";
+import {GoogleBook} from "../../google-book";
 
 @Component({
     selector: 'app-search-results',
-    templateUrl: './search-results.component.html',
-    styleUrls: ['./search-results.component.sass']
+    templateUrl: 'search-results.component.html',
+    styleUrls: ['search-results.component.sass'],
+    changeDetection : ChangeDetectionStrategy.OnPush
 })
 export class SearchResultsComponent implements OnInit {
     @Input() books : Observable<any>;

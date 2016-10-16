@@ -1,15 +1,13 @@
-import {Component, OnInit, SimpleChange, OnChanges, EventEmitter} from "@angular/core";
-import {Book} from "../book";
+import {Component, OnInit, SimpleChange, OnChanges, EventEmitter, ChangeDetectionStrategy} from "@angular/core";
+import {Book} from "../../book";
 import {FormBuilder, FormGroup, Validators, FormControl} from "@angular/forms";
-import {Store} from "@ngrx/store";
-import {State} from "../state/state";
 import {Input, Output} from "@angular/core/src/metadata/directives";
-import {BookActionBuilder} from "../state/book-action-builder";
 
 @Component({
     selector: 'app-edit-book',
-    templateUrl: './edit-book.component.html',
-    styleUrls: ['./edit-book.component.sass']
+    templateUrl: 'edit-book.component.html',
+    styleUrls: ['edit-book.component.sass'],
+    changeDetection : ChangeDetectionStrategy.OnPush
 })
 export class EditBookComponent implements OnInit, OnChanges {
     @Input() sourceBook: Book;
