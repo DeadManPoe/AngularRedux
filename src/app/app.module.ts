@@ -15,9 +15,10 @@ import {queryBookReducer} from "./state/query-book-reducer";
 import {queryKeywordsReducer} from "./state/query-keywords-reducer";
 import {RouterModule} from "@angular/router";
 import {routes} from "./routes";
-import { HomeComponent } from './home/home.component';
 import { BookListComponent } from './book-list/book-list.component';
 import { BookFilterComponent } from './book-filter/book-filter.component';
+import { SearchResultsComponent } from './search-results/search-results.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
     declarations: [
@@ -26,10 +27,11 @@ import { BookFilterComponent } from './book-filter/book-filter.component';
         AddBookComponent,
         EditBookComponent,
         BookSearchComponent,
-        HomeComponent,
         BookCollectionComponent,
         BookListComponent,
-        BookFilterComponent
+        BookFilterComponent,
+        SearchResultsComponent,
+        PageNotFoundComponent
     ],
     imports: [
         BrowserModule,

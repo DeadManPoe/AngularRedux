@@ -10,8 +10,8 @@ import {QueryActionBuilder} from "../state/query-action-builder";
 import {State} from "../state/state";
 import {empty} from "rxjs/observable/empty";
 import {Observable} from "rxjs";
-
-
+import {GoogleBook} from "../google-book";
+import {BookActionBuilder} from "../state/book-action-builder";
 
 
 @Component({
@@ -49,6 +49,17 @@ export class BookSearchComponent implements OnInit {
         }
         this._store.dispatch(QueryActionBuilder.queryBook([]));
         return empty();
+    }
+    addBookToCollection(book : GoogleBook){
+        let targetObj = {
+            id : 0,
+            title : book.title,
+            author : book.authors[0],
+            description : book.description || '',
+            cover : book.imageLinks.thumbnail || '',
+            read : false
+        };
+        this._store.dispatch(BookActionBuilder.addBook(targetObj));
     }
 
 }

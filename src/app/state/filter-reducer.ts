@@ -9,7 +9,7 @@ const changeFilter = (filters: FilterMap, action: Action)=> {
 };
 export const filtersReducer = (filters: FilterMap, action: Action)=> {
     switch (action.type) {
-        case 'CHANGE_FILTER': {
+        case 'CHANGE_FILTERS': {
             return changeFilter(filters, action);
         }
         default : {

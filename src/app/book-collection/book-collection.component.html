@@ -1,3 +1,5 @@
+<br>
 <app-add-book (addBook)="addBook($event)"></app-add-book>
 <app-book-filter [filters]="filters | async" (changeFilter)="changeFilter($event)"></app-book-filter>
-<app-book-list [books]="books | async" (toggleBookRead)="toggleBookRead($event)" (removeBook)="removeBook($event)"></app-book-list>
+<app-edit-book (editBook)="editBook($event)" [sourceBook]="bookToBeEdited"></app-edit-book>
+<app-book-list [books]="books | async" (toggleBookRead)="toggleBookRead($event)" (editBook)="updateBook($event)" (removeBook)="removeBook($event)"></app-book-list>

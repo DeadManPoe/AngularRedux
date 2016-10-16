@@ -1,0 +1,17 @@
+<ul>
+    <li *ngFor="let book of books">
+        <div>
+            <img *ngIf="book.volumeInfo.imageLinks" [src]="book.volumeInfo.imageLinks.thumbnail" alt="">
+            <h6>Authors</h6>
+            <p *ngFor="let author of book.volumeInfo.authors">{{author}}</p>
+            <h6>Title</h6>
+            <p>{{book.volumeInfo.title}}</p>
+            <h6 [hidden]="!book.volumeInfo.subtitle">Subtitle</h6>
+            <p>{{book.volumeInfo.subtitle}}</p>
+            <h6 [hidden]="!book.volumeInfo.description">Description</h6>
+            <p>{{book.volumeInfo.description}}</p>
+            <button (click)="addToCollectionM(book.volumeInfo)">Add book</button>
+        </div>
+        <br>
+    </li>
+</ul>

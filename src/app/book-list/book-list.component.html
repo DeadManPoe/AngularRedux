@@ -8,8 +8,10 @@
            <h2>{{book.title}}</h2>
            <p>{{book.description}}</p>
            <div>
-               <input type="checkbox" name="isRead" [value]="book.read" (change)="toggleBookReadM(book.id)">
+               <span>READ</span>
+               <input type="checkbox" name="isRead" [checked]="book.read" (change)="toggleBookReadM(book.id)">
                <button (click)="removeBookM()">Remove</button>
+               <button (click)="editBookM(book)">Edit</button>
            </div>
        </div>
    </li>

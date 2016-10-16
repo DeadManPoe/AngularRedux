@@ -1,9 +1,9 @@
-import {Component, OnInit, SimpleChange, OnChanges} from "@angular/core";
+import {Component, OnInit, SimpleChange, OnChanges, EventEmitter} from "@angular/core";
 import {Book} from "../book";
 import {FormBuilder, FormGroup, Validators, FormControl} from "@angular/forms";
 import {Store} from "@ngrx/store";
 import {State} from "../state/state";
-import {Input} from "@angular/core/src/metadata/directives";
+import {Input, Output} from "@angular/core/src/metadata/directives";
 import {BookActionBuilder} from "../state/book-action-builder";
 
 @Component({
@@ -13,17 +13,11 @@ import {BookActionBuilder} from "../state/book-action-builder";
 })
 export class EditBookComponent implements OnInit, OnChanges {
     @Input() sourceBook: Book;
+    @Output() editBook = new EventEmitter();
     public isHidden: boolean;
     public editForm: FormGroup;
 
-    constructor(private _fb: FormBuilder, private _store: Store<State>) {
-        this.sourceBook = {
-            id: 0,
-            title: '',
-            author: '',
-            cover: '',
-            read: false
-        };
+    constructor(private _fb: FormBuilder) {
         this.isHidden = true;
         this.editForm = this._fb.group({
             title: new FormControl('', [<any>Validators.required]),
@@ -33,14 +27,12 @@ export class EditBookComponent implements OnInit, OnChanges {
 
     ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
         for (let prop in changes) {
-            if (prop === 'sourceBook' && this.sourceBook.id !== 0) {
-                console.log(this.sourceBook);
+            if ((prop === 'sourceBook') && (this.sourceBook.id !== 0)) {
                 this.editForm = this._fb.group({
                     title: new FormControl(this.sourceBook.title, [<any>Validators.required]),
                     author: new FormControl(this.sourceBook.author, [<any>Validators.required])
                 });
                 this.isHidden = false;
-
             }
         }
     }
@@ -56,7 +48,7 @@ export class EditBookComponent implements OnInit, OnChanges {
     submitEdit() {
         if (this.editForm.valid) {
             let targetObj = (<any>Object).assign({}, this.sourceBook, this.editForm.value);
-            this._store.dispatch(BookActionBuilder.updateBook(targetObj));
+            this.editBook.emit(targetObj);
             //confirm msg
             this.isHidden = true;
         }
