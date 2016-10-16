@@ -1,5 +1,6 @@
 <h5>FILTERS</h5>
 <ul>
     <li>Books reads</li>
-    <input type="checkbox" [value]="filters.readBooks" (change)="changeFilterM()">
+    <input type="checkbox" [value]="filters.readBooks" (change)="changeFilterM({
+    'readBooks' : !filters.readBooks})">
 </ul>

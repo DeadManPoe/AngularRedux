@@ -41,7 +41,7 @@ import { BookFilterComponent } from './book-filter/book-filter.component';
             queryKeywords : queryKeywordsReducer,
             queryResults : queryBookReducer,
             books: booksReducer,
-            filter: filtersReducer
+            filters: filtersReducer
         }, initialState)
     ],
     bootstrap: [AppComponent]

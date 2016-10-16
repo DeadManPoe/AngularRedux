@@ -1,20 +1,19 @@
 import {Action} from "@ngrx/store";
+import {FilterMap} from "../filter-map";
 
-const readFilter = (filter: string, action: Action)=> {
-    if (filter === 'READ_FILTER') {
-        return 'NONE'
-    }
-    else {
-        return 'READ_FILTER'
-    }
+const initialFilters = {
+    readBooks : false
 };
-export const filtersReducer = (filter: string, action: Action)=> {
+const changeFilter = (filters: FilterMap, action: Action)=> {
+    return action.payload;
+};
+export const filtersReducer = (filters: FilterMap, action: Action)=> {
     switch (action.type) {
-        case 'READ_FILTER': {
-            return readFilter(filter, action);
+        case 'CHANGE_FILTER': {
+            return changeFilter(filters, action);
         }
         default : {
-            return filter;
+            return filters;
         }
     }
 };

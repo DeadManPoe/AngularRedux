@@ -5,6 +5,8 @@ import {Observable} from "rxjs";
 import {BookActionBuilder} from "../state/book-action-builder";
 import {FilterMap} from "../filter-map";
 import {FilterActionBuilder} from "../state/filter-action-builder";
+import {Book} from "../book";
+import {combineLatest} from "rxjs/observable/combineLatest";
 
 @Component({
     selector: 'app-book-collection',
@@ -15,11 +17,21 @@ export class BookCollectionComponent {
     public books : Observable<any>;
     public filters : Observable<any>;
     constructor(private _store : Store<State>){
-        this.books = _store.select('books');
         this.filters = _store.select('filters');
+        this.books = combineLatest(
+            _store.select('books'),
+            _store.select('filters'),
+            (books, filters)=> {
+                return books.filter((val)=> {
+                    return !(filters.readBooks && !val.read)
+                })
+            });
     }
     ngOnInit(){
 
+    }
+    addBook(book : Book){
+        this._store.dispatch(BookActionBuilder.addBook(book));
     }
     removeBook(bookId : number){
         this._store.dispatch(BookActionBuilder.removeBook(bookId));

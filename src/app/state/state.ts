@@ -7,7 +7,6 @@ export interface State {
     queryResults: List<any>
     books: List<Book>
     filters: FilterMap
-
 }
 export const initialState: State = {
     queryKeywords: '',

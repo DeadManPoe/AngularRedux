@@ -8,7 +8,7 @@ import {FilterMap} from "../filter-map";
     styleUrls: ['./book-filter.component.sass']
 })
 export class BookFilterComponent implements OnInit {
-    @Input() filters : FilterMap;
+    @Input() filters;
     @Output() changeFilter = new EventEmitter();
 
     constructor() {
@@ -18,7 +18,8 @@ export class BookFilterComponent implements OnInit {
     }
 
     changeFilterM(filterObject : FilterMap){
-        this.changeFilter.emit(filterObject)
+        let targetObject = (<any>Object).assign({}, this.filters, filterObject);
+        this.changeFilter.emit(targetObject);
     }
 
 }

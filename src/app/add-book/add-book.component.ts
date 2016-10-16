@@ -1,8 +1,8 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, EventEmitter} from "@angular/core";
 import {FormGroup, FormControl, FormBuilder, Validators} from "@angular/forms";
 import {Store} from "@ngrx/store";
 import {State} from "../state/state";
-import {BookActionBuilder} from "../state/book-action-builder";
+import {Output} from "@angular/core/src/metadata/directives";
 
 @Component({
     selector: 'app-add-book',
@@ -10,11 +10,14 @@ import {BookActionBuilder} from "../state/book-action-builder";
     styleUrls: ['./add-book.component.sass']
 })
 export class AddBookComponent implements OnInit {
+    @Output() addBook = new EventEmitter();
     public addBookForm: FormGroup;
+    public formVisible : boolean;
     private formSubmitted: boolean;
     private id: number;
 
     constructor(private _store: Store<State>, private _fb: FormBuilder) {
+        this.formVisible = false;
         this.id = 0;
     }
 
@@ -25,8 +28,11 @@ export class AddBookComponent implements OnInit {
             'author': new FormControl('', [<any>Validators.required])
         });
     }
+    openAddBookForm(){
+        this.formVisible = true;
+    }
 
-    submitAdd() {
+    addBookM() {
         if (this.addBookForm.valid) {
             let targetObject = (<any>Object).assign({}, this.addBookForm.value, {
                 id: ++this.id,
@@ -34,7 +40,8 @@ export class AddBookComponent implements OnInit {
                 read: false
             });
             this.addBookForm.reset();
-            this._store.dispatch(BookActionBuilder.addBook(targetObject));
+            this.formSubmitted = false;
+            this.addBook.emit(targetObject);
         }
     }
 
