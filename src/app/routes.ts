@@ -1,6 +1,6 @@
 
 import {BookSearchComponent} from "./book-search/book-search.component";
-import {BookListComponent} from "./book-list/book-list.component";
+import {BookCollectionComponent} from "./book-collection/book-collection.component";
 import {AddBookComponent} from "./add-book/add-book.component";
 import {HomeComponent} from "./home/home.component";
 
@@ -11,7 +11,7 @@ export const routes = [
     },
     {
         path : 'collection',
-        component : BookListComponent
+        component : BookCollectionComponent
     },
     {
         path : 'add-book',

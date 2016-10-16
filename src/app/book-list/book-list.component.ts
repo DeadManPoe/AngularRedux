@@ -1,39 +1,31 @@
-import {Component, Input, ChangeDetectionStrategy, EventEmitter} from "@angular/core";
+import {Component, OnInit, EventEmitter} from "@angular/core";
+import {Input, Output} from "@angular/core/src/metadata/directives";
 import {Observable} from "rxjs";
-import {Store} from "@ngrx/store";
-import {State} from "../state/state";
-import {BookActionBuilder} from "../state/book-action-builder";
-import {Book} from "../book";
 import {List} from "immutable";
-import {Output} from "@angular/core/src/metadata/directives";
-import {FilterActionBuilder} from "../state/filter-action-builder";
-import {TryoutServiceService} from "../tryout-service.service";
-
+import {Book} from "../book";
 
 @Component({
     selector: 'app-book-list',
     templateUrl: './book-list.component.html',
     styleUrls: ['./book-list.component.sass']
 })
-export class BookListComponent {
-    public books : Observable<any>;
-    public filter : Observable<any>;
+export class BookListComponent implements OnInit {
 
-    constructor(private _store: Store<State>) {
-        this.books = _store.select('books');
-        this.filter = _store.select('filter');
+    @Input() books : Observable<List<Book>>;
+    @Output() toggleBookRead = new EventEmitter();
+    @Output() removeBook = new EventEmitter();
+
+    constructor() {
     }
 
-    removeBook(bookId: number) {
-        this._store.dispatch(BookActionBuilder.removeBook(bookId));
+    ngOnInit() {
     }
 
-    toggleReadBook(bookId: number) {
-        this._store.dispatch(BookActionBuilder.toggleRead(bookId));
+    toggleBookReadM(bookId : number){
+        this.toggleBookRead.emit(bookId);
+    }
+    removeBookM(bookId : number){
+        this.removeBook.emit(bookId);
     }
 
-    toggleReadFilter() {
-        this._store.dispatch(FilterActionBuilder.readFilter());
-
-    }
 }

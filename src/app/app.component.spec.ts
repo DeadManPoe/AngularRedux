@@ -2,7 +2,7 @@
 
 import {TestBed, async} from "@angular/core/testing";
 import {AppComponent} from "./app.component";
-import {BookListComponent} from "./book-list/book-list.component";
+import {BookListComponent} from "./book-collection/book-collection.component";
 import {AddBookComponent} from "./add-book/add-book.component";
 import {EditBookComponent} from "./edit-book/edit-book.component";
 import {FormBuilder} from "@angular/forms";

@@ -7,7 +7,7 @@ import {StoreModule} from "@ngrx/store";
 import {initialState} from "./state/state";
 import {filtersReducer} from "./state/filter-reducer";
 import {booksReducer} from "./state/book-reducer";
-import {BookListComponent} from "./book-list/book-list.component";
+import {BookCollectionComponent} from "./book-collection/book-collection.component";
 import {AddBookComponent} from "./add-book/add-book.component";
 import {EditBookComponent} from "./edit-book/edit-book.component";
 import { BookSearchComponent } from './book-search/book-search.component';
@@ -16,8 +16,8 @@ import {queryKeywordsReducer} from "./state/query-keywords-reducer";
 import {RouterModule} from "@angular/router";
 import {routes} from "./routes";
 import { HomeComponent } from './home/home.component';
-import {TryoutServiceService} from "./tryout-service.service";
-import { BooksCollectionComponent } from './books-collection/books-collection.component';
+import { BookListComponent } from './book-list/book-list.component';
+import { BookFilterComponent } from './book-filter/book-filter.component';
 
 @NgModule({
     declarations: [
@@ -27,7 +27,9 @@ import { BooksCollectionComponent } from './books-collection/books-collection.co
         EditBookComponent,
         BookSearchComponent,
         HomeComponent,
-        BooksCollectionComponent
+        BookCollectionComponent,
+        BookListComponent,
+        BookFilterComponent
     ],
     imports: [
         BrowserModule,
@@ -42,7 +44,6 @@ import { BooksCollectionComponent } from './books-collection/books-collection.co
             filter: filtersReducer
         }, initialState)
     ],
-    providers: [TryoutServiceService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

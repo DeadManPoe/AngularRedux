@@ -1,11 +1,16 @@
-<ul style="list-style: none;">
-    <li *ngFor="let book of books | async" style="border: 1px solid red; padding: 5px;">
-        <p>{{book.title}}</p>
-        <p>{{book.author}}</p>
-        <div *ngIf="book.cover">
-            <img [src]="book.cover" alt="">
-        </div>
-        <input type="checkbox" [checked]="book.read" (change)="toggleReadBook(book.id)"><br>
-        <button (click)="removeBook(book.id)">Remove book</button>
-    </li>
+<ul>
+   <li *ngFor="let book of books">
+       <div>
+           <img [src]="book.cover" alt="">
+       </div>
+       <div>
+           <p>{{book.author}}</p>
+           <h2>{{book.title}}</h2>
+           <p>{{book.description}}</p>
+           <div>
+               <input type="checkbox" name="isRead" [value]="book.read" (change)="toggleBookReadM()">
+               <button (click)="removeBookM()">Remove</button>
+           </div>
+       </div>
+   </li>
 </ul>

@@ -1,8 +1,9 @@
+import {FilterMap} from "../filter-map";
 export class FilterActionBuilder {
-    static readFilter() {
+    static changeFilters(filters : FilterMap) {
         return {
-            type: 'READ_FILTER',
-            payload: null
+            type: 'CHANGE_FILTERS',
+            payload: filters
         }
     }
 }

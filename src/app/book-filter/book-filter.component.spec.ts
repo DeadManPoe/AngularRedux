@@ -1,11 +1,11 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async } from '@angular/core/testing';
-import { BooksCollectionComponent } from './books-collection.component';
+import { BookFilterComponent } from './book-filter.component';
 
-describe('Component: BooksCollection', () => {
+describe('Component: BookFilter', () => {
   it('should create an instance', () => {
-    let component = new BooksCollectionComponent();
+    let component = new BookFilterComponent();
     expect(component).toBeTruthy();
   });
 });
