@@ -16,6 +16,8 @@ import { SearchResultsComponent } from './dumb-components/search-results/search-
 import { PageNotFoundComponent } from './dumb-components/page-not-found/page-not-found.component';
 import {NgReduxModule, NgRedux} from "ng2-redux";
 import {rootReducer} from "./state/root-reducer";
+const createLogger = require('redux-logger');
+
 
 @NgModule({
     declarations: [
@@ -42,6 +44,6 @@ import {rootReducer} from "./state/root-reducer";
 })
 export class AppModule {
     constructor(ngRedux: NgRedux<State>) {
-        ngRedux.configureStore(rootReducer, initialState, []);
+        ngRedux.configureStore(rootReducer, initialState, [createLogger()]);
     }
 }
