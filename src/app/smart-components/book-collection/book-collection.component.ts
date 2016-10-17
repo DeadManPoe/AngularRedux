@@ -1,5 +1,4 @@
 import {Component} from "@angular/core";
-import {Store} from "@ngrx/store";
 import {State} from "../../state/state";
 import {Observable} from "rxjs";
 import {BookActionBuilder} from "../../state/book-action-builder";
@@ -7,17 +6,18 @@ import {FilterMap} from "../../filter-map";
 import {FilterActionBuilder} from "../../state/filter-action-builder";
 import {Book} from "../../book";
 import {combineLatest} from "rxjs/observable/combineLatest";
+import {select, NgRedux} from "ng2-redux";
 
 @Component({
     selector: 'app-book-collection',
     templateUrl: 'book-collection.component.html',
-    styleUrls: ['book-collection.component.sass']
+    styleUrls: ['book-collection.component.sass'],
 })
 export class BookCollectionComponent {
     public books : Observable<any>;
-    public filters : Observable<any>;
+    @select('filters') filters : Observable<any>;
     public bookToBeEdited : Object;
-    constructor(private _store : Store<State>){
+    constructor(private ngRedux : NgRedux<State>){
         this.bookToBeEdited = {
             id : 0,
             title : '',
@@ -26,10 +26,9 @@ export class BookCollectionComponent {
             cover : '',
             read : false
         };
-        this.filters = _store.select('filters');
         this.books = combineLatest(
-            _store.select('books'),
-            _store.select('filters'),
+            ngRedux.select('books'),
+            ngRedux.select('filters'),
             (books, filters)=> {
                 return books.filter((val)=> {
                     return (!filters.readBooks || val.read)
@@ -40,22 +39,22 @@ export class BookCollectionComponent {
 
     }
     addBook(book : Book){
-        this._store.dispatch(BookActionBuilder.addBook(book));
+        this.ngRedux.dispatch(BookActionBuilder.addBook(book));
     }
     removeBook(bookId : number){
-        this._store.dispatch(BookActionBuilder.removeBook(bookId));
+        this.ngRedux.dispatch(BookActionBuilder.removeBook(bookId));
     }
     changeFilter(filters : FilterMap){
-        this._store.dispatch(FilterActionBuilder.changeFilters(filters));
+        this.ngRedux.dispatch(FilterActionBuilder.changeFilters(filters));
     }
     toggleBookRead(bookId : number){
-        this._store.dispatch(BookActionBuilder.toggleRead(bookId));
+        this.ngRedux.dispatch(BookActionBuilder.toggleRead(bookId));
     }
     updateBook(book : Book){
         this.bookToBeEdited = book;
     }
     editBook(book : Book){
-        this._store.dispatch(BookActionBuilder.updateBook(book));
+        this.ngRedux.dispatch(BookActionBuilder.updateBook(book));
     }
 
 }

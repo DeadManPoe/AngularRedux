@@ -1,6 +1,6 @@
-import {Action} from "@ngrx/store";
 import {Book} from "../book";
 import {List} from "immutable";
+import {Action} from "./action";
 
 
 const addBook = (books: List<Book>, action: Action)=> {

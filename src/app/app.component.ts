@@ -1,10 +1,7 @@
 import {Component} from "@angular/core";
-import {Observable} from "rxjs";
-import {Store} from "@ngrx/store";
-import {State} from "./state/state";
-import {combineLatest} from "rxjs/observable/combineLatest";
-import {Book} from "./book";
-import {BookActionBuilder} from "./state/book-action-builder";
+import {State, initialState} from "./state/state";
+import {NgRedux} from "ng2-redux";
+import {rootReducer} from "./state/root-reducer";
 
 
 @Component({
@@ -14,5 +11,4 @@ import {BookActionBuilder} from "./state/book-action-builder";
 })
 export class AppComponent {
 
-    constructor() {}
 }

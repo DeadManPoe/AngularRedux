@@ -5,13 +5,13 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
-import {Store} from "@ngrx/store";
 import {QueryActionBuilder} from "../../state/query-action-builder";
-import {State} from "../../state/state";
 import {empty} from "rxjs/observable/empty";
 import {Observable} from "rxjs";
 import {GoogleBook} from "../../google-book";
 import {BookActionBuilder} from "../../state/book-action-builder";
+import {select, NgRedux} from "ng2-redux";
+import {State} from "../../state/state";
 
 
 @Component({
@@ -22,13 +22,11 @@ import {BookActionBuilder} from "../../state/book-action-builder";
 })
 export class BookSearchComponent implements OnInit {
     public searchControl : FormControl;
-    public queryResults : Observable<any>;
-    public queryKeywords : Observable<any>;
+    @select('queryResults') queryResults : Observable<any>;
+    @select('queryKeywords') queryKeywords : Observable<any>;
 
-    constructor(private _gbooksService : GoogleBooksApiService, private _store : Store<State>) {
+    constructor(private _gbooksService : GoogleBooksApiService, private _store : NgRedux<State> ) {
         this.searchControl = new FormControl('');
-        this.queryResults = this._store.select('queryResults');
-        this.queryKeywords = this._store.select('queryKeywords');
     }
 
     ngOnInit() {
