@@ -1,4 +1,4 @@
 <h2>Search</h2>
-<input type="search" [formControl]="searchControl" [value]="queryKeywords | async">
-<h2>Keywords: {{queryKeywords | async}}</h2>
-<app-search-results (addToCollection)="addBookToCollection($event)" [books]="queryResults | async"></app-search-results>
+<input type="search" [formControl]="searchControl" [value]="(query | async).keywords">
+<h2>Keywords: {{(query | async).keywords}}</h2>
+<app-search-results (addToCollection)="addBookToCollection($event)" [books]="query | async"></app-search-results>

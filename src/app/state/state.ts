@@ -3,16 +3,25 @@ import {Book} from "../book";
 import {FilterMap} from "../filter-map";
 
 export interface State {
-    queryKeywords : string
-    queryResults: List<any>
+    gbooksQuery : GbooksQuery
     books: List<Book>
     filters: FilterMap
 }
 export const initialState: State = {
-    queryKeywords: '',
-    queryResults : List([]),
+    gbooksQuery : {
+        pending : false,
+        errors : null,
+        keywords : '',
+        results : []
+    },
     books: List([]),
     filters: {
         readBooks : false
     }
 };
+export interface GbooksQuery {
+    pending: boolean,
+    errors: any,
+    keywords: string,
+    results: Object[]
+}

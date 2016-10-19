@@ -12,6 +12,7 @@ import {GoogleBook} from "../../google-book";
 import {BookActionBuilder} from "../../state/book-action-builder";
 import {select, NgRedux} from "ng2-redux";
 import {State} from "../../state/state";
+import {GbooksQueryActionBuilder} from "../../state/gbooks-query-action-builder";
 
 
 @Component({
@@ -22,8 +23,7 @@ import {State} from "../../state/state";
 })
 export class BookSearchComponent implements OnInit {
     public searchControl : FormControl;
-    @select('queryResults') queryResults : Observable<any>;
-    @select('queryKeywords') queryKeywords : Observable<any>;
+    @select('gbooksQuery') query : Observable<any>;
 
     constructor(private _gbooksService : GoogleBooksApiService, private _store : NgRedux<State> ) {
         this.searchControl = new FormControl('');
@@ -37,16 +37,15 @@ export class BookSearchComponent implements OnInit {
                 this.checkInput(values)
             )
             .subscribe(results => {
-                this._store.dispatch(QueryActionBuilder.queryBookSucceded(results));
+                this._store.dispatch(GbooksQueryActionBuilder.querySucceded(results));
             })
     }
     checkInput(values){
-        this._store.dispatch(QueryActionBuilder.setQueryKeywords(values));
         if(values){
-            this._store.dispatch(QueryActionBuilder.queryBookStarted());
+            this._store.dispatch(GbooksQueryActionBuilder.queryStarted(values));
             return this._gbooksService.getSearchResults(values);
         }
-        this._store.dispatch(QueryActionBuilder.queryBookSucceded([]));
+        this._store.dispatch(GbooksQueryActionBuilder.queryResetted());
         return empty();
     }
     addBookToCollection(book : GoogleBook){

@@ -1,5 +1,5 @@
 <ul>
-    <li *ngFor="let book of books">
+    <li *ngFor="let book of books.results">
         <div>
             <img *ngIf="book.volumeInfo.imageLinks" [src]="book.volumeInfo.imageLinks.thumbnail" alt="">
             <h6>Authors</h6>
