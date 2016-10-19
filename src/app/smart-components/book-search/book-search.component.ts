@@ -37,22 +37,23 @@ export class BookSearchComponent implements OnInit {
                 this.checkInput(values)
             )
             .subscribe(results => {
-                this._store.dispatch(QueryActionBuilder.queryBook(results));
+                this._store.dispatch(QueryActionBuilder.queryBookSucceded(results));
             })
     }
     checkInput(values){
         this._store.dispatch(QueryActionBuilder.setQueryKeywords(values));
         if(values){
+            this._store.dispatch(QueryActionBuilder.queryBookStarted());
             return this._gbooksService.getSearchResults(values);
         }
-        this._store.dispatch(QueryActionBuilder.queryBook([]));
+        this._store.dispatch(QueryActionBuilder.queryBookSucceded([]));
         return empty();
     }
     addBookToCollection(book : GoogleBook){
         let targetObj = {
             id : 0,
             title : book.title,
-            author : book.authors[0],
+            author : book.authors[0] || '',
             description : book.description || '',
             cover : book.imageLinks.thumbnail || '',
             read : false

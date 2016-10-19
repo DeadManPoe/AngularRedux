@@ -1,9 +1,21 @@
 
 export class QueryActionBuilder {
-    static queryBook(results : Object[] ){
+    static queryBookStarted(){
         return {
-            type : 'QUERY_BOOK',
+            type : 'QUERY_BOOK_STARTED',
+            payload : null
+        }
+    }
+    static queryBookSucceded(results : Object[]){
+        return {
+            type : 'QUERY_BOOK_SUCCEDED',
             payload : results
+        }
+    }
+    static queryBookErrored(){
+        return {
+            type : 'QUERY_BOOK_ERRORED',
+            payload : null
         }
     }
     static setQueryKeywords(keywords : string){
