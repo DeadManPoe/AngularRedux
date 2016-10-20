@@ -5,7 +5,6 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
-import {QueryActionBuilder} from "../../state/query-action-builder";
 import {empty} from "rxjs/observable/empty";
 import {Observable} from "rxjs";
 import {GoogleBook} from "../../google-book";
