@@ -16,6 +16,8 @@ import { SearchResultsComponent } from './dumb-components/search-results/search-
 import { PageNotFoundComponent } from './dumb-components/page-not-found/page-not-found.component';
 import {NgReduxModule, NgRedux} from "ng2-redux";
 import {rootReducer} from "./state/root-reducer";
+import { HomeComponent } from './smart-components/home/home.component';
+import { LoginComponent } from './login/login.component';
 const createLogger = require('redux-logger');
 
 
@@ -30,7 +32,9 @@ const createLogger = require('redux-logger');
         BookListComponent,
         BookFilterComponent,
         SearchResultsComponent,
-        PageNotFoundComponent
+        PageNotFoundComponent,
+        HomeComponent,
+        LoginComponent
     ],
     imports: [
         BrowserModule,

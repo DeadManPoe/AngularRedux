@@ -3,8 +3,13 @@ import {BookSearchComponent} from "./smart-components/book-search/book-search.co
 import {BookCollectionComponent} from "./smart-components/book-collection/book-collection.component";
 import {AddBookComponent} from "./dumb-components/add-book/add-book.component";
 import {PageNotFoundComponent} from "./dumb-components/page-not-found/page-not-found.component";
+import {LoginComponent} from "./login/login.component";
 
 export const routes = [
+    {
+        path : 'login',
+        component : LoginComponent
+    },
     {
         path : 'search',
         component : BookSearchComponent

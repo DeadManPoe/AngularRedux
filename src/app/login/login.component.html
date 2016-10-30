@@ -1,0 +1,17 @@
+<form action="#" [formGroup]="loginForm"  novalidate>
+    <div class="form-row">
+        <label for="email-field">Email</label>
+        <input id="email-field" type="email" name="email-field" formControlName="email" [ngClass]="{ 'error-border' : emailFormField.invalid && emailFormField.touched }">
+    </div>
+    <div class="form-row">
+        <input type="checkbox"> Remember me
+    </div>
+    <div class="form-row">
+        <label for="password-field">Password</label>
+        <input id="password-field" type="email" name="password-field" formControlName="password" [ngClass]="{ 'error-border' : passwordFormField.invalid && passwordFormField.touched }">
+    </div>
+    <div class="form-row">
+        <a href="#">Forgot password?</a>
+    </div>
+    <button type="submit">Log in</button>
+</form>
