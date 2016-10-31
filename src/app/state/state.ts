@@ -3,11 +3,16 @@ import {Book} from "../book";
 import {FilterMap} from "../filter-map";
 
 export interface State {
+    user : any
     gbooksQuery : GbooksQuery
     books: List<Book>
     filters: FilterMap
 }
 export const initialState: State = {
+    user : {
+        user : {},
+        mode : 'NOT_LOGGED',
+    },
     gbooksQuery : {
         pending : false,
         errors : null,

@@ -1,10 +1,10 @@
-<form action="#" [formGroup]="loginForm"  novalidate>
+<form action="#" [formGroup]="loginForm" (ngSubmit)="submitForm()"   novalidate>
     <div class="form-row">
         <label for="email-field">Email</label>
         <input id="email-field" type="email" name="email-field" formControlName="email" [ngClass]="{ 'error-border' : emailFormField.invalid && emailFormField.touched }">
     </div>
     <div class="form-row">
-        <input type="checkbox"> Remember me
+        <input type="checkbox" name="remember-filed" formControlName="remember"> Remember me
     </div>
     <div class="form-row">
         <label for="password-field">Password</label>
@@ -14,4 +14,5 @@
         <a href="#">Forgot password?</a>
     </div>
     <button type="submit">Log in</button>
+    {{loginForm.value | json}}
 </form>
