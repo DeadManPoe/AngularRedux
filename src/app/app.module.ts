@@ -18,6 +18,7 @@ import {NgReduxModule, NgRedux} from "ng2-redux";
 import {rootReducer} from "./state/root-reducer";
 import { HomeComponent } from './smart-components/home/home.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 const createLogger = require('redux-logger');
 
 
@@ -34,7 +35,8 @@ const createLogger = require('redux-logger');
         SearchResultsComponent,
         PageNotFoundComponent,
         HomeComponent,
-        LoginComponent
+        LoginComponent,
+        RegisterComponent
     ],
     imports: [
         BrowserModule,

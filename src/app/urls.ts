@@ -1,3 +1,8 @@
+
+const domain = 'http://localhost:8080';
+
+
 export const urls = {
-    login : 'http://localhost:8080/userauth'
+    login : domain+'/userauth',
+    register : domain+'/user'
 };

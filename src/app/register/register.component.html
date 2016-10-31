@@ -1,0 +1,12 @@
+<form action="#" [formGroup]="registerForm" (ngSubmit)="submitForm()"   novalidate>
+    <div class="form-row">
+        <label for="email-field">Email</label>
+        <input id="email-field" type="email" name="email-field" formControlName="email" [ngClass]="{ 'error-border' : emailControl.invalid && emailControl.touched }">
+    </div>
+    <div class="form-row">
+        <label for="password-field">Password</label>
+        <input id="password-field" type="password" name="password-field" formControlName="password" [ngClass]="{ 'error-border' : passwordControl.invalid && passwordControl.touched }">
+    </div>
+    <button type="submit">Register</button>
+    <p *ngIf="registerError">Registration failed</p>
+</form>

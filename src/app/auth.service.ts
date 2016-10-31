@@ -8,21 +8,39 @@ export class AuthService {
     constructor(private _http: Http) {
     }
 
-    login(loginInfo : LoginInfo){
+    urify(params : Object){
         let headers = new Headers();
         let body = new URLSearchParams();
-        headers.append('Content-Type','application/x-www-form-urlencoded');
-        body.append('email',loginInfo.email);
-        body.append('password',loginInfo.password);
-        body.append('remember',loginInfo.remember.toString());
-
-        return this._http.post(urls.login,body.toString(),{
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        for(let key in params){
+            body.append(key, params[key]);
+        }
+        return {
+            body : body,
             headers : headers
+        }
+    }
+
+    login(loginInfo: LoginInfo) {
+        let requestInfo = this.urify(loginInfo);
+
+        return this._http.post(urls.login, requestInfo.body.toString(), {
+            headers: requestInfo.headers
+        }).map(response => response.json())
+    }
+
+    register(registerInfo: RegisterInfo){
+        let requestInfo = this.urify(registerInfo);
+        return this._http.post(urls.register, requestInfo.body.toString(), {
+            headers : requestInfo.headers
         }).map(response => response.json())
     }
 
 
-
+}
+interface RegisterInfo{
+    email : string,
+    password : string
 }
 interface LoginInfo{
     email : string,

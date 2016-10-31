@@ -4,11 +4,16 @@ import {BookCollectionComponent} from "./smart-components/book-collection/book-c
 import {AddBookComponent} from "./dumb-components/add-book/add-book.component";
 import {PageNotFoundComponent} from "./dumb-components/page-not-found/page-not-found.component";
 import {LoginComponent} from "./login/login.component";
+import {RegisterComponent} from "./register/register.component";
 
 export const routes = [
     {
         path : 'login',
         component : LoginComponent
+    },
+    {
+        path: 'register',
+        component : RegisterComponent
     },
     {
         path : 'search',

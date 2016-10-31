@@ -8,11 +8,11 @@
     </div>
     <div class="form-row">
         <label for="password-field">Password</label>
-        <input id="password-field" type="email" name="password-field" formControlName="password" [ngClass]="{ 'error-border' : passwordFormField.invalid && passwordFormField.touched }">
+        <input id="password-field" type="password" name="password-field" formControlName="password" [ngClass]="{ 'error-border' : passwordFormField.invalid && passwordFormField.touched }">
     </div>
     <div class="form-row">
         <a href="#">Forgot password?</a>
     </div>
     <button type="submit">Log in</button>
-    {{loginForm.value | json}}
+    <p *ngIf="loginError">Authentication failed</p>
 </form>

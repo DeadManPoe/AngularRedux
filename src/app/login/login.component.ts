@@ -15,7 +15,7 @@ const jwt = require('jwt-decode');
     providers : [AuthService]
 })
 export class LoginComponent implements OnInit {
-
+    public loginError : boolean;
     public loginForm : FormGroup;
     public emailFormField : AbstractControl;
     public passwordFormField : AbstractControl;
@@ -36,9 +36,17 @@ export class LoginComponent implements OnInit {
     submitForm(){
         if(!this.loginForm.invalid || true){
             this._auth.login(this.loginForm.value).subscribe((value)=>{
-                this.ngRedux.dispatch(UserActionBuilder.setUserInfo(jwt(value.token)));
-                this.ngRedux.dispatch(UserActionBuilder.setMode('LOGGED'));
-                this._router.navigateByUrl('/collection');
+                if(value.success){
+                    let token : string = value.token;
+                    this.ngRedux.dispatch(UserActionBuilder.setUserInfo(jwt(token)));
+                    this.ngRedux.dispatch(UserActionBuilder.setMode('LOGGED'));
+                    window.localStorage.setItem('jwt',token);
+                    this._router.navigateByUrl('/collection');
+                }
+                else{
+                    this.loginError = true;
+                }
+
             })
         }
     }
