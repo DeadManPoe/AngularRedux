@@ -5,6 +5,7 @@ import {AddBookComponent} from "./dumb-components/add-book/add-book.component";
 import {PageNotFoundComponent} from "./dumb-components/page-not-found/page-not-found.component";
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
+import {AuthGuard} from "./authGuard";
 
 export const routes = [
     {
@@ -21,7 +22,8 @@ export const routes = [
     },
     {
         path : 'collection',
-        component : BookCollectionComponent
+        component : BookCollectionComponent,
+        canActivate : [AuthGuard]
     },
     {
         path : 'add-book',
