@@ -7,13 +7,13 @@ import {FilterActionBuilder} from "../../state/filter-action-builder";
 import {Book} from "../../book";
 import {combineLatest} from "rxjs/observable/combineLatest";
 import {select, NgRedux} from "ng2-redux";
-import {AuthService} from "../../auth.service";
+import {ServerPersistenceService} from "../../server-persistence.service";
 
 @Component({
     selector: 'app-book-collection',
     templateUrl: 'book-collection.component.html',
     styleUrls: ['book-collection.component.sass'],
-    providers: [AuthService]
+    providers: [ServerPersistenceService]
 })
 export class BookCollectionComponent {
 
@@ -21,7 +21,7 @@ export class BookCollectionComponent {
     @select('filters') filters: Observable<any>;
     public bookToBeEdited: Object;
 
-    constructor(private ngRedux: NgRedux<State>, private _auth: AuthService) {
+    constructor(private ngRedux: NgRedux<State>, private _server: ServerPersistenceService) {
         this.bookToBeEdited = {
             id: 0,
             title: '',
@@ -46,10 +46,19 @@ export class BookCollectionComponent {
 
     addBook(book: Book) {
         this.ngRedux.dispatch(BookActionBuilder.addBook(book));
+        this._server.persistBook(book).subscribe(val => {
+            this.ngRedux.dispatch(BookActionBuilder.updateBook(book.id, {
+                id : val.id
+            }))
+        })
+
     }
 
     removeBook(bookId: number) {
         this.ngRedux.dispatch(BookActionBuilder.removeBook(bookId));
+        this._server.removeBook(bookId).subscribe(val => {
+
+        })
     }
 
     changeFilter(filters: FilterMap) {
@@ -64,8 +73,9 @@ export class BookCollectionComponent {
         this.bookToBeEdited = book;
     }
 
-    editBook(book: Book) {
-        this.ngRedux.dispatch(BookActionBuilder.updateBook(book));
+    editBook(object) {
+        this.ngRedux.dispatch(BookActionBuilder.updateBook(object.bookId, object.book));
+        this._server.updateBook(object.bookId, object.book).subscribe()
     }
 
 }

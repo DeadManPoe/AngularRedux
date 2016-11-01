@@ -45,8 +45,11 @@ export class EditBookComponent implements OnInit, OnChanges {
 
     submitEdit() {
         if (this.editForm.valid) {
-            let targetObj = (<any>Object).assign({}, this.sourceBook, this.editForm.value);
-            this.editBook.emit(targetObj);
+            let targetObj = this.editForm.value;
+            this.editBook.emit({
+                bookId : this.sourceBook.id,
+                book : targetObj
+            });
             //confirm msg
             this.isHidden = true;
         }

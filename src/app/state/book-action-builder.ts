@@ -22,10 +22,13 @@ export class BookActionBuilder {
         }
     }
 
-    static updateBook(book: Book) {
+    static updateBook(bookId : number,book: any) {
         return {
             type: 'UPDATE_BOOK',
-            payload: book
+            payload: {
+                id : bookId,
+                book : book
+            }
         }
     }
 }

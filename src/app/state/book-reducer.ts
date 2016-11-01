@@ -26,12 +26,13 @@ const toggleReadBook = (books: List<Book>, action: Action)=> {
 };
 
 const updateBook = (books: List<Book>, action: Action) => {
-    let id = action.payload;
+    let id = action.payload.id;
     let index = books.findIndex((item)=> {
         return item.id === id;
     });
     return books.update(index, (item)=> {
-        return (<any>Object).assign({}, item, action.payload);
+        console.log((<any>Object).assign({}, item, action.payload.book));
+        return (<any>Object).assign({}, item, action.payload.book);
     })
 };
 export const booksReducer = (books: List<Book> = List([]), action: Action)=> {

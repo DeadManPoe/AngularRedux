@@ -21,6 +21,8 @@ import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
 import {AuthGuard} from "./authGuard";
 import {AuthService} from "./auth.service";
+import {UrifyService} from "./urify.service";
+import {HeadersMiddlewareService} from "./headers-middleware.service";
 const createLogger = require('redux-logger');
 
 
@@ -50,7 +52,9 @@ const createLogger = require('redux-logger');
     ],
     providers : [
         AuthService,
-        AuthGuard
+        AuthGuard,
+        UrifyService,
+        HeadersMiddlewareService
     ],
     bootstrap: [AppComponent]
 })
