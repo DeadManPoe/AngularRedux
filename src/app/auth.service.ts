@@ -37,12 +37,7 @@ export class AuthService {
     }
 
     checkToken(){
-        let headers = new Headers();
-        let token = window.localStorage.getItem('jwt');
-        headers.append('x-access-token', token);
-        return this._http.post(urls.token, '',{
-            headers : headers
-        }).map(val => val.json().success);
+        return !!window.localStorage.getItem('jwt');
     }
 
 

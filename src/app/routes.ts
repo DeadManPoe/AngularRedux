@@ -10,7 +10,8 @@ import {AuthGuard} from "./authGuard";
 export const routes = [
     {
         path : 'login',
-        component : LoginComponent
+        component : LoginComponent,
+        canActivate : [AuthGuard]
     },
     {
         path: 'register',
@@ -18,7 +19,8 @@ export const routes = [
     },
     {
         path : 'search',
-        component : BookSearchComponent
+        component : BookSearchComponent,
+        canActivate : [AuthGuard]
     },
     {
         path : 'collection',
@@ -27,12 +29,9 @@ export const routes = [
     },
     {
         path : 'add-book',
-        component : AddBookComponent
+        component : AddBookComponent,
+        canActivate : [AuthGuard]
 
-    },
-    {
-        path : '',
-        component : BookCollectionComponent
     },
     {
         path : '',
