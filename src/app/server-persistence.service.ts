@@ -26,6 +26,11 @@ export class ServerPersistenceService {
             headers : this._headers_mid.applyJwt(new Headers())
         }).map(response => response.json());
     }
+    getBooks(){
+        return this._http.get(urls.books(''),{
+            headers : this._headers_mid.applyJwt(new Headers())
+        }).map(response => response.json());
+    }
 
 
 }

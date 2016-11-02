@@ -38,10 +38,17 @@ export class BookCollectionComponent {
                     return (!filters.readBooks || val.read)
                 })
             });
+        this.books.subscribe((val)=>{
+            console.log("val "+val);
+        })
     }
 
     ngOnInit() {
-
+        this._server.getBooks().subscribe(val => {
+            val.books.forEach(item => {
+                this.ngRedux.dispatch(BookActionBuilder.addBook(item))
+            })
+        })
     }
 
     addBook(book: Book) {
@@ -53,6 +60,7 @@ export class BookCollectionComponent {
         })
 
     }
+    getBooks(){}
 
     removeBook(bookId: number) {
         this.ngRedux.dispatch(BookActionBuilder.removeBook(bookId));

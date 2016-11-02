@@ -5,8 +5,8 @@ import {FilterMap} from "../filter-map";
 export interface State {
     user : any
     gbooksQuery : GbooksQuery
-    books: List<Book>
-    filters: FilterMap
+    books: InpureProp
+    filters: PureProp
 }
 export const initialState: State = {
     user : {
@@ -19,7 +19,13 @@ export const initialState: State = {
         keywords : '',
         results : []
     },
-    books: List([]),
+    books: {
+        side_effects : {
+            pending : [],
+            errors : []
+        },
+        data : List([])
+    },
     filters: {
         readBooks : false
     }
@@ -29,4 +35,15 @@ export interface GbooksQuery {
     errors: any,
     keywords: string,
     results: Object[]
+}
+interface InpureProp{
+    side_effects : SideEffects,
+    data : any
+}
+interface PureProp{
+    data : any
+}
+interface SideEffects{
+    pending : string[],
+    errors : any[]
 }

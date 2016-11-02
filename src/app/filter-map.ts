@@ -1,3 +1,3 @@
-export interface FilterMap {
+export interface PurePropFilterMap {
     readBooks : boolean
 }
