@@ -1,12 +1,11 @@
 import {List} from "immutable";
 import {Book} from "../book";
-import {FilterMap} from "../filter-map";
 
 export interface State {
     user : any
     gbooksQuery : GbooksQuery
-    books: InpureProp
-    filters: PureProp
+    books: BooksInterface
+    filters: FiltersInterface
 }
 export const initialState: State = {
     user : {
@@ -14,36 +13,38 @@ export const initialState: State = {
         mode : 'NOT_LOGGED',
     },
     gbooksQuery : {
-        pending : false,
-        errors : null,
+        side_effects : {
+            pending : List([]),
+            errors : List([])
+        },
         keywords : '',
-        results : []
+        results : List([])
     },
     books: {
         side_effects : {
-            pending : [],
-            errors : []
+            pending : List([]),
+            errors : List([])
         },
-        data : List([])
+        books : List([])
     },
     filters: {
         readBooks : false
     }
 };
-export interface GbooksQuery {
-    pending: boolean,
-    errors: any,
+interface GbooksQuery {
+    side_effects : SideEffects
     keywords: string,
     results: Object[]
 }
-interface InpureProp{
+
+export interface SideEffects{
+    pending : List<string>,
+    errors : List<any>
+}
+export interface BooksInterface {
     side_effects : SideEffects,
-    data : any
+    books : List<Book>
 }
-interface PureProp{
-    data : any
-}
-interface SideEffects{
-    pending : string[],
-    errors : any[]
+interface FiltersInterface {
+    readBooks : boolean
 }
