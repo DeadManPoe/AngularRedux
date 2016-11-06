@@ -1,9 +1,9 @@
 
-import {GbooksQuery, initialState} from "./state";
+import {initialState} from "./state";
 import {Action} from "./action";
 
 
-const queryStarted = (gbooksQueryObj : GbooksQuery, action : Action) : GbooksQuery=>{
+const queryStarted = (gbooksQueryObj : any, action : Action) : any=>{
     let targetObj = (<any>Object).assign({},gbooksQueryObj,{
         pending : true,
         keywords : action.payload,
@@ -13,7 +13,7 @@ const queryStarted = (gbooksQueryObj : GbooksQuery, action : Action) : GbooksQue
 };
 
 
-const querySucceded = (gbooksQueryObj: GbooksQuery, action: Action) : GbooksQuery => {
+const querySucceded = (gbooksQueryObj: any, action: Action) : any => {
     let targetObj = (<any>Object).assign({},gbooksQueryObj, {
         pending : false,
         results : action.payload,
@@ -21,14 +21,14 @@ const querySucceded = (gbooksQueryObj: GbooksQuery, action: Action) : GbooksQuer
     });
     return targetObj;
 };
-const queryErrored = (gbooksQueryObj: GbooksQuery, action: Action) : GbooksQuery =>{
+const queryErrored = (gbooksQueryObj: any, action: Action) : any =>{
     let targetObj = (<any>Object).assign({},gbooksQueryObj, {
         pending : false,
         errors : action.payload
     });
     return targetObj;
 };
-const queryResetted  = (gbooksQueryObj: GbooksQuery, action: Action) : GbooksQuery =>{
+const queryResetted  = (gbooksQueryObj: any, action: Action) : any =>{
     let targetObj = {
         keywords : '',
         results : [],
@@ -37,7 +37,7 @@ const queryResetted  = (gbooksQueryObj: GbooksQuery, action: Action) : GbooksQue
     };
     return targetObj;
 };
-export const gbooksQueryReducer = (gbooksQueryObj : GbooksQuery = initialState.gbooksQuery, action : Action) : GbooksQuery=>{
+export const gbooksQueryReducer = (gbooksQueryObj : any = initialState.gbooksQuery, action : Action) : any=>{
     switch(action.type){
         case 'QUERY_STARTED': {
             return queryStarted(gbooksQueryObj, action);

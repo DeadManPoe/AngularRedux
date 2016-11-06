@@ -34,7 +34,7 @@ export const initialState: State = {
 interface GbooksQuery {
     side_effects : SideEffects
     keywords: string,
-    results: Object[]
+    results: List<any>
 }
 
 export interface SideEffects{

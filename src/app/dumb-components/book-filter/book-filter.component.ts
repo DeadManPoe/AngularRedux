@@ -1,6 +1,5 @@
 import {Component, OnInit, EventEmitter, ChangeDetectionStrategy} from "@angular/core";
 import {Input, Output} from "@angular/core/src/metadata/directives";
-import {FilterMap} from "../../filter-map";
 
 @Component({
     selector: 'app-book-filter',
@@ -18,7 +17,7 @@ export class BookFilterComponent implements OnInit {
     ngOnInit() {
     }
 
-    changeFilterM(filterObject : FilterMap){
+    changeFilterM(filterObject : any){
         let targetObject = (<any>Object).assign({}, this.filters, filterObject);
         this.changeFilter.emit(targetObject);
     }

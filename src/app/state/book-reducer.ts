@@ -1,4 +1,3 @@
-import {Book} from "../book";
 import {List} from "immutable";
 import {Action} from "./action";
 import {BooksInterface, SideEffects} from "./state";
@@ -9,87 +8,98 @@ const initialBooks = {
     books: List([])
 };
 
-const addBook = (books: List<Book>, action: Action)=> {
+const addBook = (books: BooksInterface, action: Action)=> {
     let book = action.payload;
-    return books.push(book);
+    return Object.assign({}, books, {
+        books: books.books.push(book)
+    });
 };
-const removeBook = (books: List<Book>, action: Action)=> {
+const removeBook = (books: BooksInterface, action: Action)=> {
     let id = action.payload;
-    let bookIndex = books.findIndex((item)=> {
+    let bookIndex = books.books.findIndex((item)=> {
         return item.id === id;
     });
-    return books.delete(bookIndex);
+    return Object.assign({}, books, {
+        books: books.books.delete(bookIndex)
+    });
 };
-const toggleReadBook = (books: List<Book>, action: Action)=> {
+const toggleReadBook = (books: BooksInterface, action: Action)=> {
     let id = action.payload;
-    let index = books.findIndex((item)=> {
+    let index = books.books.findIndex((item)=> {
         return item.id === id;
     });
-    return books.update(index, (item)=> {
-        return (<any>Object).assign({}, item, {read: !item.read});
+    return Object.assign({}, books, {
+        books: books.books.update(index, (item)=> {
+            return (<any>Object).assign({}, item, {read: !item.read});
+        })
     })
-
 };
-
-const updateBook = (books: List<Book>, action: Action) => {
+const updateBook = (books: BooksInterface, action: Action) => {
     let id = action.payload.id;
-    let index = books.findIndex((item)=> {
+    let index = books.books.findIndex((item)=> {
         return item.id === id;
     });
-    return books.update(index, (item)=> {
-        console.log((<any>Object).assign({}, item, action.payload.book));
-        return (<any>Object).assign({}, item, action.payload.book);
-    })
-};
-
-const startSideEffect = (side_effects: SideEffects, action: Action) : SideEffects=> {
-    let targetObj = Object.assign({}, side_effects, {
-        pending : side_effects.pending.push(action.payload)
-    });
-    return targetObj;
-};
-const sideEffectFinished = (side_effects: SideEffects, action: Action) : SideEffects=> {
-    let id = action.payload;
-    let sideEffectIndex = side_effects.pending.findIndex((item)=> {
-        return item === id;
-    });
-    let targetObj = Object.assign({}, side_effects, {
-        pending : side_effects.pending.delete(sideEffectIndex)
-    });
-    return targetObj;
-};
-const sideEffectErrored = (side_effects: SideEffects, action : Action)=>{
-    let targetObj = Object.assign({}, sideEffectFinished(side_effects,action), {
-        errors : side_effects.errors.push({
-            id : action.payload.id,
-            error : action.payload.error
+    return Object.assign({}, books, {
+        books: books.books.update(index, (item)=> {
+            return Object.assign({}, item, action.payload.book);
         })
     });
-    return targetObj
+};
+
+const sideEffectStarted = (books: BooksInterface, action: Action) => {
+    let partialObject = Object.assign({},books.side_effects, {
+        pending : books.side_effects.pending.push(action.payload)
+    });
+    return Object.assign({}, books, {
+        side_effects: partialObject
+    });
+};
+const sideEffectFinished = (books : BooksInterface, action: Action) => {
+    let id = action.payload;
+    let sideEffectIndex = books.side_effects.pending.findIndex((item)=> {
+        return item === id;
+    });
+    let partialObject = Object.assign({},books.side_effects, {
+        pending : books.side_effects.pending.delete(sideEffectIndex)
+    });
+    return Object.assign({},books, {
+        side_effects : partialObject
+    });
+};
+const sideEffectErrored = (books: BooksInterface, action: Action)=> {
+    let intermediateState = sideEffectFinished(books, action);
+    return Object.assign({}, intermediateState, {
+        side_effects : Object.assign({},intermediateState.side_effects, {
+            errors : intermediateState.side_effects.errors.push({
+                id: action.payload.id,
+                error: action.payload.error
+            })
+        })
+    });
 };
 
 export const booksReducer = (books: BooksInterface = initialBooks, action: Action)=> {
     switch (action.type) {
         case 'ADD_BOOK': {
-            return addBook(books.books, action);
+            return addBook(books, action);
         }
         case 'REMOVE_BOOK': {
-            return removeBook(books.books, action);
+            return removeBook(books, action);
         }
         case 'TOGGLE_READ' : {
-            return toggleReadBook(books.books, action);
+            return toggleReadBook(books, action);
         }
         case 'UPDATE_BOOK' : {
-            return updateBook(books.books, action);
+            return updateBook(books, action);
         }
-        case 'START_SIDE_EFFECT': {
-            return startSideEffect(books.side_effects, action);
+        case 'SIDE_EFFECT_START': {
+            return sideEffectStarted(books, action);
         }
-        case 'FINISH_SIDE_EFFECT': {
-            return sideEffectFinished(books.side_effects, action);
+        case 'SIDE_EFFECT_END': {
+            return sideEffectFinished(books, action);
         }
         case 'SIDE_EFFECT_ERRORED' : {
-            return sideEffectErrored(books.side_effects, action);
+            return sideEffectErrored(books, action);
         }
         default : {
             return books;
